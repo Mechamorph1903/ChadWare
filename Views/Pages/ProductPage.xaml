@@ -14,7 +14,7 @@
                 <Label Text="New and Trending" VerticalOptions="Center" HorizontalOptions="Center" />
                 <Label Text="Sale" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Center" />
                 <HorizontalStackLayout VerticalOptions="Center">
-                    <Image Source="user_icon.png" WidthRequest="24" HeightRequest="24"/>
+                    <Image Source="user_logo.png" WidthRequest="24" HeightRequest="24"/>
                     <Label Text="Sarah" Margin="5,0,0,0"/>
                 </HorizontalStackLayout>
             </Grid>
