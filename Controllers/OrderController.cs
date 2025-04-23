@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChadWare.Controllers
 {
-    class OrderController
+    public class OrderController
     {
     }
 }
