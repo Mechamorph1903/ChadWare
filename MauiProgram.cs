@@ -2,6 +2,7 @@
 using ChadWare.Services;
 using Supabase;
 
+
 namespace ChadWare
 {
     public static class MauiProgram
@@ -16,6 +17,7 @@ namespace ChadWare
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
 
             // 1) Supabase endpoint & key from your Dashboard → API settings
             var supabaseUrl = "https://zukkrgpezbltcktdrvdl.supabase.co";
@@ -34,6 +36,7 @@ namespace ChadWare
                 return client;
             });
             builder.Services.AddScoped<IDataService, SupabaseDataService>();
+
 
 #if DEBUG
     		builder.Logging.AddDebug();

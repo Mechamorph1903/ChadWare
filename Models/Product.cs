@@ -22,6 +22,7 @@ namespace ChadWare.Models
         [Column("price")]
         public decimal Price { get; set; }
 
+
         [Column("image")]
         public string Image { get; set; }
 
@@ -45,6 +46,7 @@ namespace ChadWare.Models
                        long stock,
                        bool inStock,
                        string category)
+
         {
             ProductID = productID;
             Name = name;
@@ -52,7 +54,9 @@ namespace ChadWare.Models
             Price = price;
             Image = image;
             Stock = stock;
+
             InStock = inStock;
+
             Category = category;
         }
     }
