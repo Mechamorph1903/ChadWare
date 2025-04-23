@@ -3,29 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Postgrest.Attributes;
 
 namespace ChadWare.Models
 {
-    internal class User
+    [Table("Users")]
+    public class User
     {
-        public int Id { get; set; }
+        [PrimaryKey("userID", false)]
+        public long UserID { get; set; }
+
+        [Column("firstName")]
         public string FirstName { get; set; }
+
+        [Column("lastName")]
         public string LastName { get; set; }
+
+        [Column("email")]
         public string Email { get; set; }
+
+        [Column("password")]
         public string Password { get; set; }
 
-        public string PhoneNumber { get; set; }
+        [Column("phoneNumber")]
+        public long PhoneNumber { get; set; }
 
-        public User(int id, string firstName, string lastName, string email, string password, string phoneNumber)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-            PhoneNumber = phoneNumber;
-        }
-
-
+        public User() { }
     }
 }
+

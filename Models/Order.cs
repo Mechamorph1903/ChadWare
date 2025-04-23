@@ -3,26 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using Postgrest.Attributes;
 
 namespace ChadWare.Models
 {
-    internal class Order
+    [Table("Orders")]
+    public class Order
     {
-        public int Id { get; set; }
-        public User User { get; set; }
-        public List<CartItem> CartItems { get; set; }
-        public decimal TotalPrice => CartItems.Sum(item => item.TotalPrice);
+        [PrimaryKey("orderID", false)]
+        public long OrderID { get; set; }
+
+        [Column("userID")]
+        public long UserID { get; set; }
+
+        [Column("totalPrice")]
+        public decimal TotalPrice { get; set; }
+
+        [Column("orderDate")]
+        public DateTime OrderDate { get; set; }
+
+        // These two aren’t stored in the Orders row directly:
+        [Ignore]
+        public List<OrderItem> Items { get; set; }
+
+        [Ignore]
         public Address ShippingAddress { get; set; }
-        public DateTime OrderDate { get; set; } = DateTime.Now;
-        public Order(User user, List<CartItem> cartItems, Address address)
+
+        public Order()
         {
-            User = user;
-            CartItems = cartItems;
-            ShippingAddress = address;
-            
-
-           
-
+            Items = new List<OrderItem>();
         }
     }
 }
+

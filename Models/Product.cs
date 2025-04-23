@@ -3,26 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Postgrest.Attributes;
 
 namespace ChadWare.Models
 {
-    internal class Product
+    [Table("Products")]                    
+    public class Product
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public string ImageUrl { get; set; }
-        public int Stock { get; set; }
+        [PrimaryKey("productID", false)]   // your PK column
+        public long ProductID { get; set; }
 
-        public Product(int id, string name, string description, decimal price, string imageUrl, int stock)
+        [Column("name")]
+        public string Name { get; set; }
+
+        [Column("description")]
+        public string Description { get; set; }
+
+        [Column("price")]
+        public decimal Price { get; set; }
+
+        [Column("image")]
+        public string Image { get; set; }
+
+        [Column("stock")]
+        public long Stock { get; set; }
+
+        [Column("inStock")]
+        public bool InStock { get; set; }
+
+        [Column("category")]
+        public string Category { get; set; }
+
+        public Product() { }
+
+        
+        public Product(long productID,
+                       string name,
+                       string description,
+                       decimal price,
+                       string image,
+                       long stock,
+                       bool inStock,
+                       string category)
         {
-            Id = id;
+            ProductID = productID;
             Name = name;
             Description = description;
             Price = price;
-            ImageUrl = imageUrl;
+            Image = image;
             Stock = stock;
+            InStock = inStock;
+            Category = category;
         }
     }
 }
