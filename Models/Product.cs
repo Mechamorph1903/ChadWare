@@ -14,8 +14,9 @@ namespace ChadWare.Models
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public int Stock { get; set; }
+        public string Category { get; set; }    
 
-        public Product(int id, string name, string description, decimal price, string imageUrl, int stock)
+        public Product(int id, string name, string description, string category, decimal price, string imageUrl, int stock)
         {
             Id = id;
             Name = name;
@@ -23,6 +24,7 @@ namespace ChadWare.Models
             Price = price;
             ImageUrl = imageUrl;
             Stock = stock;
+            Category = category;
         }
     }
 }
