@@ -3,26 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace ChadWare.Models
 {
+    [Table("Orders")]
     internal class Order
     {
-        public int Id { get; set; }
-        public User User { get; set; }
-        public List<CartItem> CartItems { get; set; }
-        public decimal TotalPrice => CartItems.Sum(item => item.TotalPrice);
+        [PrimaryKey, AutoIncrement]
+        // PK column, auto-incremented
+        public long OrderID { get; set; }
+
+        // FK to your User table
+        public long UserID { get; set; }
+
+        // Total amount for the order
+        public decimal TotalPrice { get; set; }
+
+        // Timestamp when the order was created
+        public DateTime OrderDate { get; set; }
+
+        // These two properties are NOT stored in the "Order" table
+        [Ignore]
+        public List<OrderItem> Items { get; set; }
+
+        [Ignore]
         public Address ShippingAddress { get; set; }
-        public DateTime OrderDate { get; set; } = DateTime.Now;
-        public Order(User user, List<CartItem> cartItems, Address address)
+
+        // Parameterless ctor required by sqlite-net
+        public Order()
         {
-            User = user;
-            CartItems = cartItems;
-            ShippingAddress = address;
-            
-
-           
-
+            Items = new List<OrderItem>();
+            OrderDate = DateTime.UtcNow;
         }
     }
 }

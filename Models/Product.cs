@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace ChadWare.Models
 {
+    [Table("Product")]
     internal class Product
     {
-        public int Id { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public long ProductID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -18,7 +21,7 @@ namespace ChadWare.Models
 
         public Product(int id, string name, string description, string category, decimal price, string imageUrl, int stock)
         {
-            Id = id;
+            ProductID = id;
             Name = name;
             Description = description;
             Price = price;
