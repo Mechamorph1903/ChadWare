@@ -8,7 +8,7 @@ using SQLite;
 namespace ChadWare.Models
 {
     [Table("Orders")]
-    internal class Order
+    public class Order
     {
         [PrimaryKey, AutoIncrement]
         // PK column, auto-incremented

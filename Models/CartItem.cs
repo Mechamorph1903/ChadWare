@@ -10,7 +10,7 @@ using Supabase.Gotrue;
 namespace ChadWare.Models
 {
     [SQLite.Table("CartItem")]
-    internal class CartItem
+    public class CartItem
     {
         [PrimaryKey, AutoIncrement]
         public long CartItemID { get; set; }

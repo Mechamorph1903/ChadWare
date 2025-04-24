@@ -8,7 +8,7 @@ using SQLite;
 namespace ChadWare.Models
 {
     [Table("Product")]
-    internal class Product
+    public class Product
     {
         [PrimaryKey, AutoIncrement]
         public long ProductID { get; set; }
