@@ -24,7 +24,24 @@ namespace ChadWare.Services
             _db.CreateTableAsync<OrderItem>().Wait();
             _db.CreateTableAsync<Address>().Wait();
         }
-
+        /// <summary>
+        /// Seeds the Product table with sample data if it's empty.
+        /// </summary>
+        public async Task SeedProductsAsync()
+        {
+            var count = await _db.Table<Product>().CountAsync();
+            if (count == 0)
+            {
+                var seedData = new List<Product>
+                {
+                    new Product { Name = "Black Dress", Description = "Elegant evening wear", Price = 299m, Image = "black_dress.png", Stock = 5, InStock = true, Category = "Apparel" },
+                    new Product { Name = "White Pants", Description = "Slim-fit chinos", Price = 199m, Image = "white_pants.png", Stock = 10, InStock = true, Category = "Apparel" },
+                    new Product { Name = "Grey Shirt", Description = "Casual unisex tee", Price = 199m, Image = "grey_shirt.png", Stock = 15, InStock = true, Category = "Apparel" }
+                    // Add more seed products as needed
+                };
+                await _db.InsertAllAsync(seedData);
+            }
+        }
         // Products
         public Task<List<Product>> FetchProductsAsync()
             => _db.Table<Product>().ToListAsync();
