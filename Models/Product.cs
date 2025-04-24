@@ -17,6 +17,8 @@ namespace ChadWare.Models
         public decimal Price { get; set; }
         public string Image { get; set; }
         public int Stock { get; set; }
+
+        public bool InStock { get; set; }
         public string Category { get; set; }    
 
         public Product() { }
@@ -30,6 +32,7 @@ namespace ChadWare.Models
             Image = imageUrl;
             Stock = stock;
             Category = category;
+            InStock = true;
         }
     }
 }
