@@ -3,18 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace ChadWare.Models
 {
-    internal class Address
+    [Table("Address")]
+    public class Address
     {
-        public int Id { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public long AddressID { get; set; }
+
+        public long OrderID { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public string Country { get; set; }
-        // Navigation property
-        public User User { get; set; }
+
+        public Address() { }
+
+        public Address(long orderId, string street, string city, string state, string zipCode)
+        {
+            OrderID = orderId;
+            Street = street;
+            City = city;
+            State = state;
+            ZipCode = zipCode;
+        }
     }
 }
