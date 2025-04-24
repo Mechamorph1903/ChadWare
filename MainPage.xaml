@@ -14,7 +14,7 @@
                    HorizontalOptions="Start" />
 
 
-            <Image Source="chadware_logo.pngnavi" 
+            <Image Source="chadwarelogo.png" 
                    HeightRequest="80"
                    Aspect="AspectFit"
                    HorizontalOptions="Start" />

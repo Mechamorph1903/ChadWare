@@ -3,6 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChadWare.Views.ProductPage"
              Title="ProductPage"
+             BackgroundColor="#a6a6a6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="20">
+            <!-- Top Header with Logo, SearchBar, and User Icon -->
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="10" VerticalOptions="Start" HeightRequest="60" ColumnSpacing="10">
+
+                <!-- Logo -->
+                <Image Source="chadwarelogo.png"
+           HeightRequest="50"
+           VerticalOptions="Center"
+           HorizontalOptions="Start" />
+
+                <!-- Search Bar -->
+                <Border Grid.Column="1"
+            Stroke="#ccc"
+            StrokeThickness="1"
+            BackgroundColor="White"
+            Padding="10,0"
+            VerticalOptions="Center"
+            HeightRequest="40">
+                    <Grid>
+                        <Entry Placeholder="Search for styles, brands..."
+                   FontSize="14"
+                   BackgroundColor="Transparent"
+                   TextColor="Black"
+                   PlaceholderColor="Gray"
+                   Margin="0"
+                   VerticalOptions="Center"
+                   HorizontalOptions="FillAndExpand"/>
+                    </Grid>
+                </Border>
+
+                <!-- User Icon -->
+                <ImageButton Grid.Column="2"
+                 Source="usericon.png"
+                 HeightRequest="40"
+                 WidthRequest="40"
+                 BackgroundColor="Transparent"
+                 VerticalOptions="Center"
+                 HorizontalOptions="End" 
+                 Clicked="OnUserIconClicked"/>
+            </Grid>
+
+            <!-- Navigation Tabs -->
+            <HorizontalStackLayout Spacing="18" HorizontalOptions="Center">
+                <Label Text="Men" FontSize="18" TextColor="Black" FontFamily="OpenSans-Regular"/>
+                <Label Text="Women" FontSize="18" TextColor="Black" FontFamily="OpenSans-Regular"/>
+                <Label Text="New and Trending" FontSize="18" TextColor="Black" FontFamily="OpenSans-Regular"/>
+                <Label Text="Sale" FontSize="18" TextColor="Red" FontFamily="OpenSans-Regular"/>
+                <!--Cart-->
+                <Image Source="cart.png" HeightRequest="24" />
+            </HorizontalStackLayout>
+
+            <!-- Hero Banner -->
+            <Image Source="womenbanner.png" Aspect="AspectFill" HeightRequest="220"/>
+
+            <!-- Category Buttons -->
+            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto"
+                  ColumnSpacing="30"
+                  Padding="10"
+                  HorizontalOptions="Center">
+                <ImageButton Source="womenapparel.png" Grid.Column="0" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+                <ImageButton Source="womenbags.png" Grid.Column="1" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+                <ImageButton Source="womenshoes.png" Grid.Column="2" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+                <ImageButton Source="womenjewelry.png" Grid.Column="3" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+            </Grid>
 
         </VerticalStackLayout>
     </ScrollView>
