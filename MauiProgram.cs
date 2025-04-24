@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Supabase;
-using Supabase.Postgrest;
+
 
 namespace ChadWare
 {
