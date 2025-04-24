@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace ChadWare.Controllers
 {
-    internal class OrderController
+    public class OrderController
     {
+        readonly IDataService _data;
+        public OrderController(IDataService dataService) => _data = dataService;
+
+        public Task PlaceOrderAsync(Order order)
+            => _data.PlaceOrderAsync(order);
+
+        public async Task CompleteOrderAsync(Page fromPage, Order order)
+        {
+            await PlaceOrderAsync(order);
+            await fromPage.DisplayAlert("Success", "Your order has been placed!", "OK");
+            await fromPage.Navigation.PopToRootAsync();
+        }
     }
 }

@@ -6,7 +6,27 @@ using System.Threading.Tasks;
 
 namespace ChadWare.Controllers
 {
-    internal class CartController
+    public class CartController
     {
+        readonly IDataService _data;
+        public CartController(IDataService dataService) => _data = dataService;
+
+        public Task<List<CartItem>> GetCartAsync(long userId)
+            => _data.GetCartAsync(userId);
+
+        public Task AddToCartAsync(long userId, CartItem item)
+            => _data.AddToCartAsync(userId, item);
+
+        public Task RemoveFromCartAsync(long userId, long cartItemId)
+            => _data.RemoveFromCartAsync(userId, cartItemId);
+
+        public async Task NavigateToCheckoutAsync(Page fromPage, long userId)
+        {
+            var items = await GetCartAsync(userId);
+            await fromPage.Navigation.PushAsync(
+                new Views.Pages.CheckoutPage(userId, items)
+            );
+        }
     }
+
 }
