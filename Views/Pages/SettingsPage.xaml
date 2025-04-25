@@ -1,12 +1,74 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChadWare.Views.Pages.SettingsPage"
-             Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#D1D1C4">
+
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+        <!-- Header -->
+        <Grid Padding="20" BackgroundColor="#D1D1C4" Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Logo -->
+            <StackLayout>
+                <Label Text="CHAD" FontAttributes="Bold" FontSize="24" TextColor="Black"/>
+                <Label Text="Ware" FontAttributes="Italic" FontSize="18" TextColor="#E74C3C" Margin="0,-10,0,0"/>
+            </StackLayout>
+
+            <!-- Search Bar -->
+            <SearchBar Placeholder="Search..." Grid.Column="1" Margin="10,0"
+                       WidthRequest="650" HeightRequest="40" BackgroundColor="White"/>
+
+            <!-- User Icon -->
+            <StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center">
+                <Image Source="user_icon.png" HeightRequest="32" WidthRequest="32"/>
+                <Label Text="Sarah" FontAttributes="Bold" VerticalOptions="Center" Margin="5,0"/>
+            </StackLayout>
+        </Grid>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Padding="20" ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <StackLayout Spacing="20" BackgroundColor="White" Padding="20" Grid.Column="0">
+                <Label Text="Sarah’s Account" FontAttributes="Bold" FontSize="20"/>
+                <BoxView HeightRequest="1" Color="Gray" />
+
+                <Button Text="Personal Info" Clicked="OnPersonalInfoClicked" />
+                <Label Text="Password, Email, Mobile, and more." FontSize="10" TextColor="Gray" HorizontalOptions="End" />
+
+                <Button Text="Communications" Clicked="OnCommunicationsClicked" />
+                <Label Text="Manage your notifications and preferences." FontSize="10" TextColor="Gray" HorizontalOptions="End" />
+
+                <Button Text="Payment Methods" Clicked="OnPaymentMethodsClicked" />
+                <Label Text="Add, edit, or remove payment options." FontSize="10" TextColor="Gray" HorizontalOptions="End" />
+
+                <Button Text="Sign Out" BackgroundColor="Transparent" TextColor="Black" Clicked="OnSignOutClicked"/>
+            </StackLayout>
+
+            <!-- Info Panel -->
+            <ContentView x:Name="ContentArea" Grid.Column="1" BackgroundColor="White" Padding="20"/>
+        </Grid>
+    </Grid>
 </ContentPage>
