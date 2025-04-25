@@ -18,13 +18,13 @@ namespace ChadWare.Models
         public long UserID { get; set; }
 
         [Ignore]
-        public Product Product { get; set; }
-       
+        //public Product? Product { get; set; }
+
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
 
-        public string Size { get; set; }
-        public decimal TotalPrice => Product.Price * Quantity;
+        public string Size { get; set; } = string.Empty;
+        //public decimal TotalPrice => Product.Price * Quantity;
 
         public CartItem()
         {
