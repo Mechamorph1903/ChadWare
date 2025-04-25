@@ -31,7 +31,9 @@ public partial class MenProductPage : ContentPage
             string category = "";
 
             if (fileName.Contains("apparel"))
-                category = "Apparel";
+            {
+               await Navigation.PushAsync(new Views.Pages.ItemsPage());
+            }
             else if (fileName.Contains("bags"))
                 category = "Bags";
             else if (fileName.Contains("shoes"))
