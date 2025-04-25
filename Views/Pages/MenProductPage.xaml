@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChadWare.Views.ProductPage"
-             Title="ProductPage"
+             x:Class="ChadWare.Views.Pages.MenProductPage"
+             Title="MenProductPage"
              BackgroundColor="#a6a6a6">
-
     <ScrollView>
         <VerticalStackLayout Padding="0" Spacing="20">
             <!-- Top Header with Logo, SearchBar, and User Icon -->
@@ -50,9 +49,9 @@
             <!-- Navigation Tabs -->
             <HorizontalStackLayout Spacing="18" HorizontalOptions="Center">
                 <Button Text="Men" FontSize="18" TextColor="Black" 
-            BackgroundColor="Transparent" Clicked="OnMenTapped" />
+                 BackgroundColor="Transparent" Clicked="OnMenTapped" />
                 <Button Text="Women" FontSize="18" TextColor="Black" BackgroundColor="Transparent"
-                        Clicked="OnWomenTapped"/>
+                 Clicked="OnWomenTapped"/>
                 <Button Text="New and Trending" FontSize="18" TextColor="Black" BackgroundColor="Transparent"/>
                 <Button Text="Sale" FontSize="18" TextColor="Red" BackgroundColor="Transparent"/>
                 <!--Cart-->
@@ -60,17 +59,17 @@
             </HorizontalStackLayout>
 
             <!-- Hero Banner -->
-            <Image Source="womenbanner.png" Aspect="AspectFill" HeightRequest="220"/>
+            <Image Source="mensbanner.png" Aspect="AspectFill" HeightRequest="220"/>
 
             <!-- Category Buttons -->
             <Grid ColumnDefinitions="Auto,Auto,Auto,Auto"
                   ColumnSpacing="30"
                   Padding="10"
                   HorizontalOptions="Center">
-                <ImageButton Source="womenapparel.png" Grid.Column="0" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
-                <ImageButton Source="womenbags.png" Grid.Column="1" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
-                <ImageButton Source="womenshoes.png" Grid.Column="2" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
-                <ImageButton Source="womenjewelry.png" Grid.Column="3" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+                <ImageButton Source="mensapparel.png" Grid.Column="0" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+                <ImageButton Source="mensbags.png" Grid.Column="1" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+                <ImageButton Source="mensshoes.png" Grid.Column="2" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
+                <ImageButton Source="mensaccessories.png" Grid.Column="3" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
             </Grid>
 
         </VerticalStackLayout>

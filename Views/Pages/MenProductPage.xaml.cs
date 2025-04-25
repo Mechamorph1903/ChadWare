@@ -1,12 +1,16 @@
-namespace ChadWare.Views;
+namespace ChadWare.Views.Pages;
 
-public partial class ProductPage : ContentPage
+public partial class MenProductPage : ContentPage
 {
-    public ProductPage()
+    private async void OnUserIconClicked(object sender, EventArgs e)
     {
-        InitializeComponent();
+        // After we have profile page
+        // await Navigation.PushAsync(new ProfilePage());
+
+        // For now
+        await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
     }
- 
+
     private async void OnMenTapped(object sender, EventArgs e)
     {
         // Navigate or show men's section
@@ -19,14 +23,6 @@ public partial class ProductPage : ContentPage
         await Navigation.PushAsync(new Views.ProductPage());
     }
 
-    private async void OnUserIconClicked(object sender, EventArgs e)
-    {
-        // After we have profile page
-        // await Navigation.PushAsync(new ProfilePage());
-
-        // For now
-        await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
-    }
     private async void OnCategoryClicked(object sender, EventArgs e)
     {
         if (sender is ImageButton button && button.Source is FileImageSource imageSource)
@@ -40,8 +36,8 @@ public partial class ProductPage : ContentPage
                 category = "Bags";
             else if (fileName.Contains("shoes"))
                 category = "Shoes";
-            else if (fileName.Contains("jewelry"))
-                category = "Jewelry";
+            else if (fileName.Contains("accessories"))
+                category = "accessories";
 
             if (!string.IsNullOrEmpty(category))
             {
@@ -55,6 +51,9 @@ public partial class ProductPage : ContentPage
                 await DisplayAlert("Error", "Unknown category", "OK");
             }
         }
-
     }
+    public MenProductPage()
+	{
+		InitializeComponent();
+	}
 }
