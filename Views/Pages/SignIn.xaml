@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChadWare.Views.Pages.SignIn_page"
+             xmlns:viewmodel="clr-namespace:ChadWare.ViewModels"
+             x:Class="ChadWare.Views.Pages.SignIn"
              BackgroundColor="#a6a6a6">
 
     <ScrollView>
@@ -12,7 +14,6 @@
                    TextColor="Black"
                    HorizontalOptions="Start" />
 
-
             <Image Source="chadware_logo.png" 
                    HeightRequest="80"
                    Aspect="AspectFit"
@@ -20,18 +21,16 @@
 
             <!-- Email Entry -->
             <Entry Placeholder="Email"
+                   Text="{Binding Email}"
                    PlaceholderColor="Gray"
                    BackgroundColor="Transparent"
                    HeightRequest="40"
-                   WidthRequest="350"
- 
-            />
-
-
+                   WidthRequest="350"/>
 
             <!-- Password Entry -->
             <Entry Placeholder="Password"
- 
+                   Text="{Binding Password}"
+                   IsPassword="True"
                    PlaceholderColor="Gray"
                    BackgroundColor="Transparent"
                    HeightRequest="40"
@@ -41,26 +40,25 @@
 
             <!-- Keep Me Signed In Checkbox -->
             <HorizontalStackLayout Spacing="10" 
-                                   HorizontalOptions="Center"
-                                   >
+                                 HorizontalOptions="Center">
                 <CheckBox Color="Black"
-                          Scale="2"/>
+                         Scale="2"
+                         IsChecked="{Binding KeepMeSignedIn}"/>
                 <VerticalStackLayout Spacing="2">
                     <Label Text="Keep Me Signed In"
                            FontAttributes="Bold"
                            TextColor="Black"
-                           FontSize="20"
-                           
-                           />
+                           FontSize="20"/>
                     <Label Text="Uncheck if you are using a public device"
                            TextColor="Gray"
-                           FontSize="15"
-                           />
+                           FontSize="15"/>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
             <!-- Login Button -->
             <Button Text="Login"
+                    Command="{Binding LoginAsyncCommand}"
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     BackgroundColor="Black"
                     TextColor="White"
                     CornerRadius="20"
@@ -70,6 +68,7 @@
 
             <!-- Sign up Button -->
             <Button Text="Sign up"
+                    Command="{Binding NavigateToSignUpCommand}"
                     BackgroundColor="White"
                     BorderColor="Black"
                     BorderWidth="1"
@@ -83,7 +82,17 @@
             <Label Text="Forgot Password"
                    TextColor="Gray"
                    FontSize="13"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             IsVisible="{Binding IsLoading}"
+                             Color="Black"
+                             HorizontalOptions="Center"/>
 
             <!-- Divider and "Or" -->
             <Grid ColumnDefinitions="*,Auto,*"

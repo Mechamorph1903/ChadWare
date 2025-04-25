@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using ChadWare.Services;    
+using ChadWare.ViewModels;
+using ChadWare.Views.Pages;
 
 namespace ChadWare
 {
@@ -15,7 +17,13 @@ namespace ChadWare
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            // Register services
             builder.Services.AddSingleton<IDataService, LocalDataService>();
+
+            // Register pages and viewmodels
+            builder.Services.AddTransient<SignIn>();
+            builder.Services.AddTransient<SignInViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

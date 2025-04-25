@@ -27,12 +27,12 @@ namespace ChadWare.Services
         Task<List<CartItem>> GetCartAsync(long userId);
 
         /// <summary>
-        /// Add one item to the user’s cart.
+        /// Add one item to the user's cart.
         /// </summary>
         Task AddToCartAsync(long userId, CartItem item);
 
         /// <summary>
-        /// Remove one item from the user’s cart.
+        /// Remove one item from the user's cart.
         /// </summary>
         Task RemoveFromCartAsync(long userId, long cartItemId);
 
@@ -51,5 +51,32 @@ namespace ChadWare.Services
         /// Authenticate with email/password and return the matching User (or null).
         /// </summary>
         Task<User> AuthenticateAsync(string email, string password);
+
+        // User related methods
+        Task<User?> GetUserAsync(string userId);
+        Task<bool> UpdateUserAsync(User user);
+        Task<bool> CreateUserAsync(User user);
+        Task<bool> DeleteUserAsync(string userId);
+        Task<User?> GetUserByEmailAsync(string email);
+        
+        // Product related methods
+        Task<List<Product>> GetProductsAsync();
+        Task<Product?> GetProductAsync(string productId);
+        Task<bool> UpdateProductAsync(Product product);
+        Task<bool> CreateProductAsync(Product product);
+        Task<bool> DeleteProductAsync(string productId);
+        
+        // Order related methods
+        Task<List<Order>> GetOrdersForUserAsync(string userId);
+        Task<Order?> GetOrderAsync(string orderId);
+        Task<bool> CreateOrderAsync(Order order);
+        Task<bool> UpdateOrderAsync(Order order);
+        
+        // Cart related methods
+        Task<List<CartItem>> GetCartItemsAsync(string userId);
+        Task<bool> AddToCartAsync(CartItem item);
+        Task<bool> UpdateCartItemAsync(CartItem item);
+        Task<bool> RemoveFromCartAsync(string userId, string productId);
+        Task<bool> ClearCartAsync(string userId);
     }
 }

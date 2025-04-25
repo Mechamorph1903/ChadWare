@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using ChadWare.Models;
 using SQLite;
 using Microsoft.Maui.Storage;
+using System;
+using System.Linq;
 
 namespace ChadWare.Services
 {
@@ -23,7 +25,32 @@ namespace ChadWare.Services
             _db.CreateTableAsync<Order>().Wait();
             _db.CreateTableAsync<OrderItem>().Wait();
             _db.CreateTableAsync<Address>().Wait();
+
+            // Initialize demo user if none exists
+            InitializeDemoUserAsync().Wait();
         }
+
+        private async Task InitializeDemoUserAsync()
+        {
+            var userCount = await _db.Table<User>().CountAsync();
+            if (userCount == 0)
+            {
+                var demoUser = new User
+                {
+                    FirstName = "Sarah",
+                    LastName = "Smith",
+                    Email = "SarahSmith45@gmail.com",
+                    Password = "demo123", // In a real app, this should be hashed
+                    PhoneNumber = "(123)-456-7890",
+                    EmailNotifications = true,
+                    SmsNotifications = false,
+                    MailNotifications = true,
+                    IsVerified = true
+                };
+                await _db.InsertAsync(demoUser);
+            }
+        }
+
         /// <summary>
         /// Seeds the Product table with sample data if it's empty.
         /// </summary>
@@ -201,5 +228,86 @@ namespace ChadWare.Services
             => _db.Table<User>()
                  .Where(u => u.Email == email && u.Password == password)
                  .FirstOrDefaultAsync();
+
+        public Task<User?> GetUserAsync(string userId)
+        {
+            if (!long.TryParse(userId, out long userIdLong))
+                return Task.FromResult<User?>(null);
+
+            return _db.Table<User>()
+                     .Where(u => u.UserID == userIdLong)
+                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            try
+            {
+                var result = await _db.UpdateAsync(user);
+                return result > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CreateUserAsync(User user)
+        {
+            try
+            {
+                var result = await _db.InsertAsync(user);
+                return result > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteUserAsync(string userId)
+        {
+            if (!long.TryParse(userId, out long userIdLong))
+                return false;
+
+            try
+            {
+                var user = await GetUserAsync(userId);
+                if (user == null) return false;
+                
+                var result = await _db.DeleteAsync(user);
+                return result > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public Task<User?> GetUserByEmailAsync(string email)
+            => _db.Table<User>()
+                 .Where(u => u.Email == email)
+                 .FirstOrDefaultAsync();
+
+        // Implement other interface methods
+        public Task<List<Product>> GetProductsAsync() => FetchProductsAsync();
+        public Task<Product?> GetProductAsync(string productId) 
+        {
+            if (!long.TryParse(productId, out long id))
+                return Task.FromResult<Product?>(null);
+            return FetchProductByIdAsync(id);
+        }
+        public Task<bool> UpdateProductAsync(Product product) => Task.FromResult(false);
+        public Task<bool> CreateProductAsync(Product product) => Task.FromResult(false);
+        public Task<bool> DeleteProductAsync(string productId) => Task.FromResult(false);
+        public Task<List<Order>> GetOrdersForUserAsync(string userId) => Task.FromResult(new List<Order>());
+        public Task<Order?> GetOrderAsync(string orderId) => Task.FromResult<Order?>(null);
+        public Task<bool> CreateOrderAsync(Order order) => Task.FromResult(false);
+        public Task<bool> UpdateOrderAsync(Order order) => Task.FromResult(false);
+        public Task<List<CartItem>> GetCartItemsAsync(string userId) => Task.FromResult(new List<CartItem>());
+        public Task<bool> AddToCartAsync(CartItem item) => Task.FromResult(false);
+        public Task<bool> UpdateCartItemAsync(CartItem item) => Task.FromResult(false);
+        public Task<bool> RemoveFromCartAsync(string userId, string productId) => Task.FromResult(false);
+        public Task<bool> ClearCartAsync(string userId) => Task.FromResult(false);
     }
 }
