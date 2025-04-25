@@ -12,12 +12,14 @@ namespace ChadWare.Models
     {
         [PrimaryKey, AutoIncrement]
         public long ProductID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
-        public string Image { get; set; }
+        public string Image { get; set; } = string.Empty;
         public int Stock { get; set; }
-        public string Category { get; set; }    
+
+        public bool InStock { get; set; }
+        public string Category { get; set; } = string.Empty;  
 
         public Product() { }
 
@@ -30,6 +32,7 @@ namespace ChadWare.Models
             Image = imageUrl;
             Stock = stock;
             Category = category;
+            InStock = true;
         }
     }
 }

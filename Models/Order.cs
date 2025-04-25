@@ -28,7 +28,7 @@ namespace ChadWare.Models
         public List<OrderItem> Items { get; set; }
 
         [Ignore]
-        public Address ShippingAddress { get; set; }
+        public Address ShippingAddress { get; set; } = new Address();
 
         // Parameterless ctor required by sqlite-net
         public Order()

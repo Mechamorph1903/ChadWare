@@ -1,4 +1,4 @@
-namespace ChadWare.Views;
+namespace ChadWare.Views.Pages;
 
 public partial class SettingsPage : ContentPage
 {

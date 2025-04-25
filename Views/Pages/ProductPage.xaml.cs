@@ -1,4 +1,4 @@
-namespace ChadWare.Views;
+namespace ChadWare.Views.Pages;
 
 public partial class ProductPage : ContentPage
 {
@@ -16,7 +16,7 @@ public partial class ProductPage : ContentPage
     private async void OnWomenTapped(object sender, EventArgs e)
     {
         // Navigate or show women's section
-        await Navigation.PushAsync(new Views.ProductPage());
+        await Navigation.PushAsync(new Views.Pages.ProductPage());
     }
 
     private async void OnUserIconClicked(object sender, EventArgs e)

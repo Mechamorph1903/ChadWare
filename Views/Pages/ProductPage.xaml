@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChadWare.Views.ProductPage"
+             x:Class="ChadWare.Views.Pages.ProductPage"
              Title="ProductPage"
              BackgroundColor="#a6a6a6">
-
     <ScrollView>
         <VerticalStackLayout Padding="0" Spacing="20">
             <!-- Top Header with Logo, SearchBar, and User Icon -->

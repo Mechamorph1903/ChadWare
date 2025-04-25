@@ -20,7 +20,7 @@ public partial class MenProductPage : ContentPage
     private async void OnWomenTapped(object sender, EventArgs e)
     {
         // Navigate or show women's section
-        await Navigation.PushAsync(new Views.ProductPage());
+        await Navigation.PushAsync(new Views.Pages.ProductPage());
     }
 
     private async void OnCategoryClicked(object sender, EventArgs e)

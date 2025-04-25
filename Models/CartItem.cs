@@ -18,23 +18,25 @@ namespace ChadWare.Models
         public long UserID { get; set; }
 
         [Ignore]
-        public Product Product { get; set; }
-       
-        public int Quantity { get; set; }
+        //public Product? Product { get; set; }
 
-        public string Size { get; set; }
-        public decimal TotalPrice => Product.Price * Quantity;
+        public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+
+        public string Size { get; set; } = string.Empty;
+        //public decimal TotalPrice => Product.Price * Quantity;
 
         public CartItem()
         {
 
         }
-        public CartItem(long userId, long productId, int quantity, string size)
+        public CartItem(long userId, long productId, int quantity, string size, decimal unitPrice)
         {
             UserID = userId;
             ProductID = productId;
             Quantity = quantity;
             Size = size;
+            UnitPrice = unitPrice;
         }
         public void UpdateQuantity()
         {
