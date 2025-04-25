@@ -55,7 +55,7 @@
                 <Button Text="New and Trending" FontSize="18" TextColor="Black" BackgroundColor="Transparent"/>
                 <Button Text="Sale" FontSize="18" TextColor="Red" BackgroundColor="Transparent"/>
                 <!--Cart-->
-                <Image Source="cart.png" HeightRequest="24" />
+                <ImageButton Source="cart.png" HeightRequest="24" Clicked="OnCartClicked"/>
             </HorizontalStackLayout>
 
             <!-- Hero Banner -->

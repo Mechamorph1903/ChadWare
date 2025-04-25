@@ -55,7 +55,7 @@
                 <Button Text="New and Trending" FontSize="18" TextColor="Black" BackgroundColor="Transparent"/>
                 <Button Text="Sale" FontSize="18" TextColor="Red" BackgroundColor="Transparent"/>
                 <!--Cart-->
-                <Image Source="cart.png" HeightRequest="24" />
+                <ImageButton Source="cart.png" HeightRequest="24" Clicked="OnCartClicked"/>
             </HorizontalStackLayout>
 
             <!-- Page Title / make it conditional according to sort-->
@@ -71,9 +71,9 @@
                     <DataTemplate>
                         <Border  Margin="5" Padding="10">
                             <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                                <Image Source="{Binding Image}" HeightRequest="120" Aspect="AspectFill"/>
+                                <Image Source="{Binding Image}" HeightRequest="280" Aspect="AspectFill"/>
                                 <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"/>
-                                <Label Text="{Binding Price, StringFormat='₹{0:F2}'}" FontSize="14" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="14" HorizontalOptions="Center"/>
                                 <Button Text="Add to Cart"
                                 CommandParameter="{Binding}"
                                 Clicked="OnAddToCartClicked"

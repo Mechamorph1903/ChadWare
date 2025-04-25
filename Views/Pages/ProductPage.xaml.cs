@@ -19,6 +19,12 @@ public partial class ProductPage : ContentPage
         await Navigation.PushAsync(new Views.Pages.ProductPage());
     }
 
+    private async void OnCartClicked(object sender, EventArgs e)
+    {
+        // Navigate to Cart
+        await Navigation.PushAsync(new Views.Pages.CartPage());
+    }
+
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
         // After we have profile page

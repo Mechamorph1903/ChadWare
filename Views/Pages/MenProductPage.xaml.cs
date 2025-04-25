@@ -11,6 +11,12 @@ public partial class MenProductPage : ContentPage
         await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
     }
 
+    private async void OnCartClicked(object sender, EventArgs e)
+    {
+        // Navigate to Cart
+        await Navigation.PushAsync(new Views.Pages.CartPage());
+    }
+
     private async void OnMenTapped(object sender, EventArgs e)
     {
         // Navigate or show men's section

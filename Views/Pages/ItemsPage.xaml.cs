@@ -13,14 +13,14 @@ namespace ChadWare.Views.Pages
 
             Products = new ObservableCollection<Product>
             {
-                new Product { Name = "Ring", Price = 1299.00m, Image = "menapparel1.jpg" },
-                new Product { Name = "T-shirt", Price = 499.00m, Image = "menapparel2.jpg" },
-                new Product { Name = "Sunglasses", Price = 899.00m, Image = "menapparel3.jpg" },
-                new Product { Name = "Jeans", Price = 1599.00m, Image = "menapparel4.jpg" },
-                new Product { Name = "Jeans", Price = 1599.00m, Image = "menapparel5.jpg" },
-                new Product { Name = "Jeans", Price = 1599.00m, Image = "menapparel6.jpg" },
-                new Product { Name = "Jeans", Price = 1599.00m, Image = "menapparel7.jpg" },
-                new Product { Name = "Jeans", Price = 1599.00m, Image = "menapparel8.jpg" },
+                new Product { Name = "Cargo Jeans", Price = 129.00m, Image = "menapparel1.jpg" },
+                new Product { Name = "Black Jeans", Price = 99.00m, Image = "menapparel2.jpg" },
+                new Product { Name = "Coat", Price = 899.00m, Image = "menapparel3.jpg" },
+                new Product { Name = "Hoodie Set", Price = 199.00m, Image = "menapparel4.jpg" },
+                new Product { Name = "Beach Wear", Price = 60.00m, Image = "menapparel5.jpg" },
+                new Product { Name = "T-Shirt set", Price = 599.00m, Image = "menapparel6.jpg" },
+                new Product { Name = "Black Shirt", Price = 99.00m, Image = "menapparel7.jpg" },
+                new Product { Name = "Funky Jeans", Price = 1599.00m, Image = "menapparel8.jpg" },
             };
 
             BindingContext = this;
@@ -29,6 +29,12 @@ namespace ChadWare.Views.Pages
         private async void OnMenTapped(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MenProductPage());
+        }
+
+        private async void OnCartClicked(object sender, EventArgs e)
+        {
+            // Navigate to Cart
+            await Navigation.PushAsync(new Views.Pages.CartPage());
         }
 
         private async void OnWomenTapped(object sender, EventArgs e)
