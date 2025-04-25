@@ -21,6 +21,7 @@ namespace ChadWare.Models
         public Product Product { get; set; }
        
         public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
 
         public string Size { get; set; }
         public decimal TotalPrice => Product.Price * Quantity;
@@ -29,12 +30,13 @@ namespace ChadWare.Models
         {
 
         }
-        public CartItem(long userId, long productId, int quantity, string size)
+        public CartItem(long userId, long productId, int quantity, string size, decimal unitPrice)
         {
             UserID = userId;
             ProductID = productId;
             Quantity = quantity;
             Size = size;
+            UnitPrice = unitPrice;
         }
         public void UpdateQuantity()
         {
