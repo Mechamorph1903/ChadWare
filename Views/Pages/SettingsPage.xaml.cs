@@ -1,6 +1,4 @@
-
-
-namespace ChadWare.Views.Pages;
+namespace ChadWare.Views.Pages
 {
 public partial class SettingsPage : ContentPage
 {
@@ -111,5 +109,4 @@ public partial class SettingsPage : ContentPage
         ContentArea.Content = stack;
     }
 }
-
 }

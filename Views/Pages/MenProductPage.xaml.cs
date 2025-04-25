@@ -37,28 +37,30 @@ public partial class MenProductPage : ContentPage
     {
         if (sender is ImageButton button && button.Source is FileImageSource imageSource)
         {
-            string fileName = imageSource.File.ToLower(); // e.g., "womenbags.png"
+            string fileName = imageSource.File.ToLower();
             string category = "";
 
             if (fileName.Contains("apparel"))
             {
-               await Navigation.PushAsync(new Views.Pages.ItemsPage());
+                category = "Men";
             }
             else if (fileName.Contains("bags"))
-                category = "Bags";
+            {
+                category = "Men Bags";
+            }
             else if (fileName.Contains("shoes"))
-                category = "Shoes";
+            {
+                category = "Men Shoes";
+            }
             else if (fileName.Contains("accessories"))
-                category = "accessories";
+            {
+                category = "Accessories";
+            }
 
             if (!string.IsNullOrEmpty(category))
             {
-                await DisplayAlert("Category Clicked", $"{category} selected", "OK");
-
-                // Example: Navigate to a specific page (you can switch to a shared CategoryPage if needed)
-                // await Navigation.PushAsync(new CategoryPage(category));
+                await Navigation.PushAsync(new Views.Pages.ItemsPage(category));
             }
-           
         }
     }
     public MenProductPage()

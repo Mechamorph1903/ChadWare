@@ -42,30 +42,22 @@ public partial class ProductPage : ContentPage
     {
         if (sender is ImageButton button && button.Source is FileImageSource imageSource)
         {
-            string fileName = imageSource.File.ToLower(); // e.g., "womenbags.png"
+            string fileName = imageSource.File.ToLower();
             string category = "";
 
             if (fileName.Contains("apparel"))
-                category = "Apparel";
+                category = "Women Apparel";
             else if (fileName.Contains("bags"))
-                category = "Bags";
+                category = "Women Bags";
             else if (fileName.Contains("shoes"))
-                category = "Shoes";
+                category = "Women Shoes";
             else if (fileName.Contains("jewelry"))
-                category = "Jewelry";
+                category = "Women Jewelry";
 
             if (!string.IsNullOrEmpty(category))
             {
-                await DisplayAlert("Category Clicked", $"{category} selected", "OK");
-
-                // Example: Navigate to a specific page (you can switch to a shared CategoryPage if needed)
-                // await Navigation.PushAsync(new CategoryPage(category));
-            }
-            else
-            {
-                await DisplayAlert("Error", "Unknown category", "OK");
+                await Navigation.PushAsync(new ItemsPage(category));
             }
         }
-
     }
 }
