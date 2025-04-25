@@ -13,6 +13,11 @@ public partial class ProductPage : ContentPage
         await Navigation.PushAsync(new Views.Pages.MenProductPage());
     }
 
+    private async void OnHomeClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Views.Pages.HomePage());
+    }
+
     private async void OnWomenTapped(object sender, EventArgs e)
     {
         // Navigate or show women's section

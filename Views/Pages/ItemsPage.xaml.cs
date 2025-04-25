@@ -37,6 +37,11 @@ namespace ChadWare.Views.Pages
             await Navigation.PushAsync(new Views.Pages.CartPage());
         }
 
+        private async void OnHomeClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.Pages.HomePage());
+        }
+
         private async void OnWomenTapped(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ProductPage());

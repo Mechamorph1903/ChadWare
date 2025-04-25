@@ -14,7 +14,7 @@
 
             if (username == "user" && password == "pass")
             {
-                await Navigation.PushAsync(new Views.Pages.ProductPage()); 
+                await Navigation.PushAsync(new Views.Pages.HomePage()); 
             }
             else
             {

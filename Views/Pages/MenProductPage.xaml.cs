@@ -16,6 +16,10 @@ public partial class MenProductPage : ContentPage
         // Navigate to Cart
         await Navigation.PushAsync(new Views.Pages.CartPage());
     }
+    private async void OnHomeClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Views.Pages.HomePage());
+    }
 
     private async void OnMenTapped(object sender, EventArgs e)
     {
