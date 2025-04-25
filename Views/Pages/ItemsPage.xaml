@@ -26,7 +26,7 @@
                             <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
 
                                 <!-- Product Image -->
-                                <Image Source="{Binding Image}"
+                                <Image Source="menapparel1.jpg"
                                        Aspect="AspectFill"
                                        HeightRequest="140"
                                        WidthRequest="140"
@@ -34,7 +34,7 @@
                                        />
 
                                 <!-- Product Name -->
-                                <Label Text="{Binding Name}"
+                                <Label Text="Shirt"
                                        FontSize="16"
                                        FontAttributes="Bold"
                                        HorizontalTextAlignment="Center"
