@@ -1,54 +1,69 @@
+using Microsoft.Maui;                       
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
 using ChadWare.Controllers;
 using ChadWare.Models;
 using ChadWare.Services;
-using static System.Net.Mime.MediaTypeNames;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace ChadWare.Views.Pages
 {
     public partial class CheckoutPage : ContentPage
     {
-        private readonly OrderController _orderController;
-        private long _currentUserId;
-        private IList<CartItem> _cartItems;
+        //private readonly OrderController _orderController;
+        ////private long _currentUserId;
+        //private IList<CartItem> _cartItems;
 
         public CheckoutPage(long userId, IList<CartItem> items)
         {
             InitializeComponent();
-            var dataService = Application.Current.Services.GetService<IDataService>();
-            _orderController = new OrderController(dataService);
+           
+            //var dataService = this.Handler.MauiContext.Services
+            //         .GetRequiredService<IDataService>();
+            //_orderController = new OrderController(dataService);
 
-            _currentUserId = userId;
-            _cartItems = items;
+            //// If you need the user again:
+            ////var mauiApp = (App)Application.Current;
+            ////_currentUserId = mauiApp.CurrentUser.UserID;
 
-            // pre-fill summary
-            CartSummary.ItemsSource = _cartItems;
-            TotalLabel.Text = _cartItems.Sum(i => i.Quantity * i.UnitPrice).ToString("C");
+            //_cartItems = items;
+
+            //// pre-fill summary
+            //CartSummary.ItemsSource = _cartItems;
+            //TotalLabel.Text = _cartItems.Sum(i => i.Quantity * i.UnitPrice).ToString("C");
         }
 
-        private async void OnPlaceOrderClicked(object sender, EventArgs e)
-        {
-            // gather shipping info from entry fields
-            var address = new Address
-            {
-                Street = StreetEntry.Text,
-                City = CityEntry.Text,
-                State = StateEntry.Text,
-                ZipCode = ZipEntry.Text
-            };
+        //private async void OnPlaceOrderClicked(object sender, EventArgs e)
+        //{
+        //    // gather shipping info from entry fields
+        //    //var address = new Address
+        //    //{
+        //    //    Street = StreetEntry.Text,
+        //    //    City = CityEntry.Text,
+        //    //    State = StateEntry.Text,
+        //    //    ZipCode = ZipEntry.Text
+        //    //};
 
-            var order = new Order
-            {
-                UserID = _currentUserId,
-                TotalPrice = _cartItems.Sum(i => i.Quantity * i.UnitPrice),
-                OrderDate = DateTime.UtcNow,
-                Items = _cartItems.ToList(),
-                ShippingAddress = address
-            };
+        //    var orderItems = _cartItems
+        //          .Select(ci => new OrderItem(
+        //              orderId: 0,                // will be set in your service
+        //              productId: ci.ProductID,
+        //              quantity: ci.Quantity,
+        //              unitPrice: ci.UnitPrice)).ToList();
 
-            await _orderController.CompleteOrderAsync(this, order);
-        }
+        //    var order = new Order
+        //    {
+        //        //UserID = _currentUserId,
+        //        UserID = 1,
+        //        TotalPrice = _cartItems.Sum(i => i.Quantity * i.UnitPrice),
+        //        OrderDate = DateTime.UtcNow,
+        //        Items = orderItems,
+        //        ShippingAddress = address
+        //    };
+
+        //    await _orderController.CompleteOrderAsync(this, order);
+        //}
     }
 }
