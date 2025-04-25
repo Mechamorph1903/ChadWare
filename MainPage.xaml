@@ -14,7 +14,7 @@
                    HorizontalOptions="Start" />
 
 
-            <Image Source="appicon.svg" 
+            <Image Source="chadwarelogo.png" 
                    HeightRequest="80"
                    Aspect="AspectFit"
                    HorizontalOptions="Start" />
@@ -67,7 +67,8 @@
                     CornerRadius="20"
                     HeightRequest="30"
                     WidthRequest="230"
-                    FontSize="20" />
+                    FontSize="20" 
+                    Clicked="OnLoginClicked"/>
 
             <!-- Sign up Button -->
             <Button Text="Sign up"
