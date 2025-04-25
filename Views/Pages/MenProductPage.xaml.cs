@@ -1,7 +1,37 @@
+using System.Collections.ObjectModel;
+using ChadWare.Models;
+using ChadWare.Services;
+
 namespace ChadWare.Views.Pages;
 
 public partial class MenProductPage : ContentPage
 {
+    private readonly ProductService _productService;
+    public ObservableCollection<Product> SearchResultsCollection => _productService.SearchResults;
+
+    public MenProductPage()
+    {
+        InitializeComponent();
+        _productService = ProductService.Instance;
+        BindingContext = this;
+    }
+
+    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        _productService.SearchProducts(e.NewTextValue);
+        SearchResults.IsVisible = !string.IsNullOrWhiteSpace(e.NewTextValue);
+        CategoryGrid.IsVisible = string.IsNullOrWhiteSpace(e.NewTextValue);
+    }
+
+    private async void OnAddToCartClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is Product product)
+        {
+            // Dummy implementation - just show success message
+            await DisplayAlert("Success", $"{product.Name} added to cart", "OK");
+        }
+    }
+
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
         // After we have profile page
@@ -63,8 +93,4 @@ public partial class MenProductPage : ContentPage
             }
         }
     }
-    public MenProductPage()
-	{
-		InitializeComponent();
-	}
 }

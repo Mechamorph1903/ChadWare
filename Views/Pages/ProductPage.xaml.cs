@@ -1,12 +1,37 @@
+using System.Collections.ObjectModel;
+using ChadWare.Models;
+using ChadWare.Services;
+
 namespace ChadWare.Views.Pages;
 
 public partial class ProductPage : ContentPage
 {
+    private readonly ProductService _productService;
+    public ObservableCollection<Product> SearchResultsCollection => _productService.SearchResults;
+
     public ProductPage()
     {
         InitializeComponent();
+        _productService = ProductService.Instance;
+        BindingContext = this;
     }
- 
+
+    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        _productService.SearchProducts(e.NewTextValue);
+        SearchResults.IsVisible = !string.IsNullOrWhiteSpace(e.NewTextValue);
+        CategoryGrid.IsVisible = string.IsNullOrWhiteSpace(e.NewTextValue);
+    }
+
+    private async void OnAddToCartClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is Product product)
+        {
+            // Dummy implementation - just show success message
+            await DisplayAlert("Success", $"{product.Name} added to cart", "OK");
+        }
+    }
+
     private async void OnMenTapped(object sender, EventArgs e)
     {
         // Navigate or show men's section
@@ -38,6 +63,7 @@ public partial class ProductPage : ContentPage
         // For now
         await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
     }
+
     private async void OnCategoryClicked(object sender, EventArgs e)
     {
         if (sender is ImageButton button && button.Source is FileImageSource imageSource)
