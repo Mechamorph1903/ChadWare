@@ -1,6 +1,14 @@
+using Microsoft.Maui;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Controls;
+using ChadWare.Controllers;
+using ChadWare.Models;
+using ChadWare.Services;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
-
-namespace ChadWare.Views.Pages;
+namespace ChadWare.Views.Pages
 {
 public partial class SettingsPage : ContentPage
 {
