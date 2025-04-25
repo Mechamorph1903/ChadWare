@@ -48,10 +48,7 @@ public partial class MenProductPage : ContentPage
                 // Example: Navigate to a specific page (you can switch to a shared CategoryPage if needed)
                 // await Navigation.PushAsync(new CategoryPage(category));
             }
-            else
-            {
-                await DisplayAlert("Error", "Unknown category", "OK");
-            }
+           
         }
     }
     public MenProductPage()

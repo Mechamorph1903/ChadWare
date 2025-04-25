@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChadWare.Views.Pages.ItemsPage"
-             Title="ItemsPage">
+             Title="ItemsPage"
+             BackgroundColor="#a6a6a6">
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="20">
 
