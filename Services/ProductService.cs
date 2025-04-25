@@ -149,7 +149,7 @@ public class ProductService
         return _allProducts.Where(p => p.Image.StartsWith(category.ToLower())).ToList();
     }
 
-    public void SearchProducts(string searchQuery)
+    public void SearchProducts(string searchQuery, string category = null)
     {
         if (string.IsNullOrWhiteSpace(searchQuery))
         {
@@ -159,7 +159,8 @@ public class ProductService
 
         var query = searchQuery.ToLower();
         var filteredProducts = _allProducts.Where(p => 
-            p.Name.ToLower().Contains(query)
+            p.Name.ToLower().Contains(query) &&
+            (category == null || p.Image.StartsWith(category.ToLower()))
         ).ToList();
 
         _searchResults.Clear();

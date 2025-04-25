@@ -18,9 +18,15 @@ public partial class ProductPage : ContentPage
 
     private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {
-        _productService.SearchProducts(e.NewTextValue);
-        SearchResults.IsVisible = !string.IsNullOrWhiteSpace(e.NewTextValue);
-        CategoryGrid.IsVisible = string.IsNullOrWhiteSpace(e.NewTextValue);
+        var searchQuery = e.NewTextValue;
+        if (string.IsNullOrWhiteSpace(searchQuery))
+        {
+            SearchResults.IsVisible = false;
+            return;
+        }
+
+        _productService.SearchProducts(searchQuery, "women");
+        SearchResults.IsVisible = SearchResultsCollection.Count > 0;
     }
 
     private async void OnAddToCartClicked(object sender, EventArgs e)
