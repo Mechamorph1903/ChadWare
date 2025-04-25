@@ -11,7 +11,7 @@
 
                 <!-- Logo -->
                 <Image Source="chadwarelogo.png"
-           HeightRequest="50"
+           HeightRequest="80"
            VerticalOptions="Center"
            HorizontalOptions="Start" />
 
