@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using ChadWare.Services;
-using ChadWare.Controllers;    // don’t forget this
+using ChadWare.Controllers;    
 using ChadWare.Views.Pages;    // so CartPage is known
 
 namespace ChadWare
