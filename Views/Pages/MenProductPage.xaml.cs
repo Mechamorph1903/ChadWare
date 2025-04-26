@@ -80,19 +80,19 @@ public partial class MenProductPage : ContentPage
 
             if (fileName.Contains("apparel"))
             {
-                category = "menapparel";
+                category = "Men";
             }
             else if (fileName.Contains("bags"))
             {
-                category = "menbag";
+                category = "Men Bags";
             }
             else if (fileName.Contains("shoes"))
             {
-                category = "menshoe";
+                category = "Men Shoes";
             }
             else if (fileName.Contains("accessories"))
             {
-                category = "menaccessory";
+                category = "Accessories";
             }
 
             if (!string.IsNullOrEmpty(category))

@@ -145,6 +145,10 @@ public class ProductService
 
                 });
     }
+    public Product GetProductById(long id)
+    {
+        return _allProducts.FirstOrDefault(p => p.ProductID == id);
+    }
 
     /// <summary>
     /// Returns all products whose Category exactly matches the given category (case-insensitive).

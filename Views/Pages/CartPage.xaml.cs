@@ -1,5 +1,5 @@
 using System;
-using Microsoft.Maui;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
@@ -11,26 +11,50 @@ namespace ChadWare.Views.Pages
 {
     public partial class CartPage : ContentPage
     {
-        private CartController _cartController;
+        private readonly CartController _cartController;
+        private readonly ObservableCollection<CartItem> _cartItems;
+        private const long DummyUserId = 1;
 
         public CartPage()
         {
             InitializeComponent();
-        }
 
+            // Resolve controller via DI
+            var ds = App.Services.GetRequiredService<IDataService>();
+            _cartController = new CartController(ds);
+
+            // Prepare collection
+            _cartItems = new ObservableCollection<CartItem>();
+            CartCollectionView.ItemsSource = _cartItems;
+        }
+        private void UpdateTotal()
+        {
+            var total = _cartItems.Sum(item => item.Quantity * item.UnitPrice);
+            TotalLabel.Text = total.ToString("C");
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            if (_cartController == null)
+            var ds = App.Services.GetRequiredService<IDataService>();
+
+            // 1. Fetch cart items
+            var cartItems = await _cartController.GetCartAsync(DummyUserId)
+                           ?? new List<CartItem>();
+
+            // 2. For each cart item, load the real Product by ID
+            foreach (var item in cartItems)
             {
-                // Grab the IDataService from App.Services
-                var ds = App.Services.GetRequiredService<IDataService>();
-                _cartController = new CartController(ds);
+                item.Product = ProductService.Instance.GetProductById(item.ProductID);
             }
 
-            var items = await _cartController.GetCartAsync(1);
-            CartCollectionView.ItemsSource = items;
+            // 3. Update the CollectionView
+            _cartItems.Clear();
+            foreach (var item in cartItems)
+                _cartItems.Add(item);
+
+            // 4. Update total
+            UpdateTotal();
         }
 
 
@@ -38,23 +62,54 @@ namespace ChadWare.Views.Pages
         {
             if (sender is Button btn && btn.CommandParameter is CartItem item)
             {
-                await _cartController.RemoveFromCartAsync(1, item.CartItemID);
-                CartCollectionView.ItemsSource = await _cartController.GetCartAsync(1);
+                await _cartController.RemoveFromCartAsync(DummyUserId, item.CartItemID);
+
+                // Remove from ObservableCollection if you have one
+                _cartItems.Remove(item);
+
+                // Update total
+                TotalLabel.Text = _cartItems.Sum(i => i.Product?.Price ?? 0).ToString("C");
             }
         }
 
+
         private async void OnCheckoutClicked(object sender, EventArgs e)
+            => await _cartController.NavigateToCheckoutAsync(this, DummyUserId);
+
+
+        private async void OnUserIconClicked(object sender, EventArgs e)
         {
-            await _cartController.NavigateToCheckoutAsync(this, 1);
+            // After we have profile page
+            // await Navigation.PushAsync(new ProfilePage());
+
+            // For now
+            await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
+        }
+
+        private async void OnCartClicked(object sender, EventArgs e)
+        {
+            // Navigate to Cart
+            await Navigation.PushAsync(new Views.Pages.CartPage());
+        }
+        private async void OnHomeClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.Pages.HomePage());
         }
 
         private async void OnMenTapped(object sender, EventArgs e)
-            => await Navigation.PushAsync(new Views.Pages.MenProductPage());
+        {
+            // Navigate or show men's section
+            await Navigation.PushAsync(new Views.Pages.MenProductPage());
+        }
 
         private async void OnWomenTapped(object sender, EventArgs e)
-            => await Navigation.PushAsync(new Views.Pages.ProductPage());
+        {
+            // Navigate or show women's section
+            await Navigation.PushAsync(new Views.Pages.ProductPage());
+        }
 
-        private async void OnUserIconClicked(object sender, EventArgs e)
-            => await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
     }
+
+
+
 }

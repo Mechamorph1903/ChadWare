@@ -72,6 +72,7 @@ public partial class ItemsPage : ContentPage
             var cartItem = new CartItem(
                    userId: _dummyUserId,
                    productId: product.ProductID,
+                   productName: product.Name,
                    quantity: 1,
                    unitPrice: product.Price,
                    size: string.Empty
