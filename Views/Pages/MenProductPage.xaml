@@ -57,6 +57,7 @@
                 <Button Text="New and Trending" FontSize="18" TextColor="Black" BackgroundColor="Transparent"/>
                 <Button Text="Sale" FontSize="18" TextColor="Red" BackgroundColor="Transparent"/>
                 <!--Cart-->
+
                 <ImageButton Source="cart.png" HeightRequest="24" Clicked="OnCartClicked" BackgroundColor="Transparent"/>
             </HorizontalStackLayout>
             
@@ -65,6 +66,9 @@
                              Clicked="OnHomeClicked" />
                 <Label Text="/" FontSize="30" VerticalTextAlignment="Center" />
                 <Label Text= "Home/Men's Clothing and Accessories" FontSize="20" VerticalTextAlignment="Center" />
+
+                <ImageButton Source="cart.png" HeightRequest="24" Clicked="OnCartClicked"/>
+
             </HorizontalStackLayout>
 
             <!-- Hero Banner -->

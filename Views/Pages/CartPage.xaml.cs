@@ -1,61 +1,60 @@
+using System;
 using Microsoft.Maui;
-using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
 using ChadWare.Controllers;
 using ChadWare.Models;
 using ChadWare.Services;
-using System;
 
 namespace ChadWare.Views.Pages
 {
     public partial class CartPage : ContentPage
     {
-        //private readonly CartController _cartController;
-        //private long _currentUserId;
+        private CartController _cartController;
 
         public CartPage()
         {
             InitializeComponent();
-            
-            // 2) Resolve your IDataService
-            //var dataService = this.Handler.MauiContext.Services
-            //         .GetRequiredService<IDataService>();
-            //_cartController = new CartController(dataService);
-            // 4) Get the current user from your App subclass
-            //var mauiApp = (App)Application.Current;
-            //_currentUserId = mauiApp.CurrentUser.UserID;
-
-            // wire up selection or remove button
-            //CartCollectionView.SelectionChanged += OnItemSelected;
         }
 
-        //protected override async void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    // fetch cart items
-        //    //var items = await _cartController.GetCartAsync(_currentUserId);
-        //    var items = await _cartController.GetCartAsync(1);
-        //    CartCollectionView.ItemsSource = items;
-        //}
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
 
-        //private async void OnRemoveClicked(object sender, EventArgs e)
-        //{
-        //    if (sender is Button btn && btn.CommandParameter is CartItem item)
-        //    {
-        //        //await _cartController.RemoveFromCartAsync(_currentUserId, item.CartItemID);
-        //        await _cartController.RemoveFromCartAsync(1, item.CartItemID);
-        //        // refresh
-        //        //CartCollectionView.ItemsSource = await _cartController.GetCartAsync(_currentUserId);
-        //        CartCollectionView.ItemsSource = await _cartController.GetCartAsync(1);
-        //    }
-        //}
+            if (_cartController == null)
+            {
+                // Grab the IDataService from App.Services
+                var ds = App.Services.GetRequiredService<IDataService>();
+                _cartController = new CartController(ds);
+            }
 
-        //private async void OnCheckoutClicked(object sender, EventArgs e)
-        //{
-        //    // navigate to checkout, passing cart items
-        //    //await _cartController.NavigateToCheckoutAsync(this, _currentUserId);
-        //    await _cartController.NavigateToCheckoutAsync(this, 1);
-        //}
+            var items = await _cartController.GetCartAsync(1);
+            CartCollectionView.ItemsSource = items;
+        }
+
+
+        private async void OnRemoveClicked(object sender, EventArgs e)
+        {
+            if (sender is Button btn && btn.CommandParameter is CartItem item)
+            {
+                await _cartController.RemoveFromCartAsync(1, item.CartItemID);
+                CartCollectionView.ItemsSource = await _cartController.GetCartAsync(1);
+            }
+        }
+
+        private async void OnCheckoutClicked(object sender, EventArgs e)
+        {
+            await _cartController.NavigateToCheckoutAsync(this, 1);
+        }
+
+        private async void OnMenTapped(object sender, EventArgs e)
+            => await Navigation.PushAsync(new Views.Pages.MenProductPage());
+
+        private async void OnWomenTapped(object sender, EventArgs e)
+            => await Navigation.PushAsync(new Views.Pages.ProductPage());
+
+        private async void OnUserIconClicked(object sender, EventArgs e)
+            => await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
     }
 }

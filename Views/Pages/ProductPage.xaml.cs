@@ -70,6 +70,12 @@ public partial class ProductPage : ContentPage
         await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
     }
 
+
+    private async void OnCartClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Views.Pages.CartPage());
+    }
+
     private async void OnCategoryClicked(object sender, EventArgs e)
     {
         if (sender is ImageButton button && button.Source is FileImageSource imageSource)

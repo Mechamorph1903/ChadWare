@@ -6,6 +6,7 @@ namespace ChadWare.Views.Pages;
 
 public partial class MenProductPage : ContentPage
 {
+
     private readonly ProductService _productService;
     public ObservableCollection<Product> SearchResultsCollection => _productService.SearchResults;
 
@@ -37,6 +38,7 @@ public partial class MenProductPage : ContentPage
             await DisplayAlert("Success", $"{product.Name} added to cart", "OK");
         }
     }
+
 
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
@@ -98,5 +100,15 @@ public partial class MenProductPage : ContentPage
                 await Navigation.PushAsync(new Views.Pages.ItemsPage(category));
             }
         }
+
     }
+
+
+    private async void OnCartClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Views.Pages.CartPage());
+    }
+
+
+
 }
