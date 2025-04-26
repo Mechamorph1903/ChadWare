@@ -74,7 +74,10 @@ namespace ChadWare.Views.Pages
 
 
         private async void OnCheckoutClicked(object sender, EventArgs e)
-            => await _cartController.NavigateToCheckoutAsync(this, DummyUserId);
+        {
+            var checkoutPage = new CheckoutPage(_cartItems.ToList());
+            await Navigation.PushAsync(checkoutPage);
+        }
 
 
         private async void OnUserIconClicked(object sender, EventArgs e)
