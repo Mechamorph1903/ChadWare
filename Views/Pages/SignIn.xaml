@@ -3,305 +3,102 @@
              x:Class="ChadWare.Views.Pages.SignIn_page"
              BackgroundColor="#a6a6a6">
 
-    <VerticalStackLayout>
-        <HorizontalStackLayout Spacing="30">
-            <Image Source="chadware_logo.png"
-               HeightRequest="80"
-               WidthRequest="80"
-               VerticalOptions="Start"/>
-
-            <SearchBar Placeholder ="Search..."
-                   Margin ="20"
-                   WidthRequest="800"
-                   HeightRequest="40"
-                   VerticalOptions="Start"
-                   BackgroundColor="White"
-                   
-                   />
-            <Image Source="user_logo.png"
-            HeightRequest="40"
-            WidthRequest="80"
-            HorizontalOptions="End"/>
-
-        </HorizontalStackLayout>
-
-        <BoxView 
-        HeightRequest="1" 
-       
-        BackgroundColor="Black" 
-        Margin="10,10"
-        Color="LightSlateGray"/>
-
-
-        <HorizontalStackLayout Spacing="30" Padding="10" BackgroundColor="Transparent">
-
-            <!-- Smaller Box -->
-            <Frame 
-        BackgroundColor="White"
-        CornerRadius="10"
-        Padding="15"
-        HasShadow="True"
-        WidthRequest="300"
-        HeightRequest="400">
-                <VerticalStackLayout Spacing="10" Padding="20">
-                    <!-- Account Header -->
-                    <Grid Margin="0,0,0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Account Icon -->
-                        <Frame Grid.Column="0" 
-                   CornerRadius="25" 
-                   HeightRequest="50" 
-                   WidthRequest="50" 
-                   Padding="0"
-                   IsClippedToBounds="True" 
-                   BackgroundColor="#333333">
-                            <Label Text="S" 
-                       HorizontalOptions="Center" 
-                       VerticalOptions="Center" 
-                       TextColor="White" 
-                       FontSize="24" 
-                       FontAttributes="Bold"/>
-                        </Frame>
-
-                        <!-- Account Name -->
-                        <Label Grid.Column="1"
-                   Text="Sarah's Account"
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Sign In Heading -->
+            <Label Text="Sign In"
                    FontSize="20"
                    FontAttributes="Bold"
-                   VerticalOptions="Center"
-                   Margin="5,0,0,0"/>
-                    </Grid>
+                   TextColor="Black"
+                   HorizontalOptions="Start" />
 
-                    <!-- Account Info Section -->
-                    <Label Text="Account info" 
-               FontSize="20" 
-               FontAttributes="Bold"/>
-                    <BoxView HeightRequest="1" 
-                 BackgroundColor="#CCCCCC" 
-                 HorizontalOptions="FillAndExpand"
-                 Margin="0,0,0,10"/>
 
-                    <!-- Personal Info with icon -->
-                    <Grid Margin="0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+            <Image Source="chadware_logo.png" 
+                   HeightRequest="80"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Start" />
 
-                        <Image Grid.Column="0" 
-                   Source="personal_info.logo.png" 
-                   HeightRequest="24" 
-                   WidthRequest="24"/>
+            <!-- Email Entry -->
+            <Entry Placeholder="Email"
+                   PlaceholderColor="Gray"
+                   BackgroundColor="Transparent"
+                   HeightRequest="40"
+                   WidthRequest="350"
+ 
+            />
 
-                        <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
-                            <Label Text="Personal Info" 
-                       FontSize="16" 
-                       FontAttributes="Bold"/>
-                            <Label Text="Password, email, mobile, and more" 
-                       FontSize="12" 
-                       TextColor="#666666"/>
-                        </VerticalStackLayout>
-                    </Grid>
 
-                    <!-- Communications with icon -->
-                    <Grid Margin="0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" 
-                   Source="messages_logo.png" 
-                   HeightRequest="24" 
-                   WidthRequest="24"/>
+            <!-- Password Entry -->
+            <Entry Placeholder="Password"
+ 
+                   PlaceholderColor="Gray"
+                   BackgroundColor="Transparent"
+                   HeightRequest="40"
+                   WidthRequest="350"/>
 
-                        <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
-                            <Label Text="Communications" 
-                       FontSize="16" 
-                       FontAttributes="Bold"/>
-                            <Label Text="Email and mail preferences" 
-                       FontSize="12" 
-                       TextColor="#666666"/>
-                        </VerticalStackLayout>
-                    </Grid>
+            <BoxView HeightRequest="1" BackgroundColor="Black" />
 
-                    <!-- Payment Methods with icon -->
-                    <Grid Margin="0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" 
-                   Source="payment_logo.png" 
-                   HeightRequest="24" 
-                   WidthRequest="24"/>
-
-                        <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
-                            <Label Text="Payment Methods" 
-                       FontSize="16" 
-                       FontAttributes="Bold"/>
-                            <Label Text="Add a payment method" 
-                       FontSize="12" 
-                       TextColor="#666666"/>
-                        </VerticalStackLayout>
-                    </Grid>
-
-                    <BoxView HeightRequest="1" 
-                 BackgroundColor="#CCCCCC" 
-                 HorizontalOptions="FillAndExpand"
-                 Margin="0,10"/>
-
-                    <!-- Sign Out Button -->
-                    <Button Text="Sign out"
-                Clicked="OnSignOutClicked"
-                HorizontalOptions="Start"
-                FontSize="16"
-                Margin="0,10,0,0"/>
+            <!-- Keep Me Signed In Checkbox -->
+            <HorizontalStackLayout Spacing="10" 
+                                   HorizontalOptions="Center"
+                                   >
+                <CheckBox Color="Black"
+                          Scale="2"/>
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Keep Me Signed In"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           FontSize="20"
+                           
+                           />
+                    <Label Text="Uncheck if you are using a public device"
+                           TextColor="Gray"
+                           FontSize="15"
+                           />
                 </VerticalStackLayout>
-            </Frame>
+            </HorizontalStackLayout>
 
-            <!-- Bigger Box -->
-            <Frame 
-        BackgroundColor="White"
-        CornerRadius="10"
-        Padding="15"
-        HasShadow="True"
-        WidthRequest="600"
-        HeightRequest="400">
+            <!-- Login Button -->
+            <Button Text="Login"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    CornerRadius="20"
+                    HeightRequest="30"
+                    WidthRequest="230"
+                    FontSize="20" />
 
+            <!-- Sign up Button -->
+            <Button Text="Sign up"
+                    BackgroundColor="White"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    TextColor="Black"
+                    CornerRadius="20"
+                    HeightRequest="30"
+                    WidthRequest="230"
+                    FontSize="20" />
 
-                <ScrollView>
-                    <VerticalStackLayout Spacing="15" Padding="20">
-                        <!-- Header -->
-                        <Label Text="Password and Personal Info" 
-                   FontSize="20" 
-                   FontAttributes="Bold"
-                   Margin="0,0,0,10"/>
+            <!-- Forgot Password -->
+            <Label Text="Forgot Password"
+                   TextColor="Gray"
+                   FontSize="13"
+                   HorizontalOptions="Center" />
 
-                        <!-- Sign-in Info Section -->
-                        <Label Text="Sign-in Info" 
-                   FontSize="18" 
-                   FontAttributes="Bold"
-                   Margin="0,10,0,5"/>
+            <!-- Divider and "Or" -->
+            <Grid ColumnDefinitions="*,Auto,*"
+                  VerticalOptions="Center"
+                  Margin="0,20,0,0">
+                <BoxView Grid.Column="0" HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="Or" TextColor="Black" Margin="10,0" />
+                <BoxView Grid.Column="2" HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Center" />
+            </Grid>
 
-                        <!-- Email Section -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Email" 
-                       FontSize="14"
-                       TextColor="#666666"/>
-                            <Label Text="sarahsmith55@gmail.com" 
-                       FontSize="16"/>
-                            <Label Text="Change email" 
-                       TextColor="Blue"
-                       TextDecorations="Underline"
-                       FontSize="14">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnChangeEmailTapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </VerticalStackLayout>
-
-                        <!-- Password Section -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Password" 
-                       FontSize="14"
-                       TextColor="#666666"/>
-                            <Label Text="Change password" 
-                       TextColor="Blue"
-                       TextDecorations="Underline"
-                       FontSize="14">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnChangePasswordTapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </VerticalStackLayout>
-
-                        <!-- Personal Info Section -->
-                        <Label Text="Personal Info" 
-                   FontSize="18" 
-                   FontAttributes="Bold"
-                   Margin="0,10,0,5"/>
-
-                        <!-- Name Section -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Name" 
-                       FontSize="14"
-                       TextColor="#666666"/>
-                            <Label Text="Sarah Smith" 
-                       FontSize="16"/>
-                            <Label Text="Change name" 
-                       TextColor="Blue"
-                       TextDecorations="Underline"
-                       FontSize="14">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnChangeNameTapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </VerticalStackLayout>
-
-                        <!-- Mobile Number Section -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Mobile number" 
-                       FontSize="14"
-                       TextColor="#666666"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0"
-                           Text="(123)-456-789" 
-                           FontSize="16"/>
-                                <Frame Grid.Column="1"
-                           BackgroundColor="Green"
-                           CornerRadius="12"
-                           HeightRequest="24"
-                           WidthRequest="24"
-                           Padding="0"
-                           HorizontalOptions="End"
-                           VerticalOptions="Center">
-                                    <Image Source="check_icon.png"
-                               HeightRequest="16"
-                               WidthRequest="16"/>
-                                </Frame>
-                            </Grid>
-                            <Label Text="Change mobile number" 
-                       TextColor="Blue"
-                       TextDecorations="Underline"
-                       FontSize="14">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnChangeMobileNumberTapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </VerticalStackLayout>
-
-                        <!-- Birthday Section -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Share your birth date with us" 
-                       FontSize="14"
-                       TextColor="#666666"/>
-                            <Label Text="Add birthday" 
-                       TextColor="Blue"
-                       TextDecorations="Underline"
-                       FontSize="14">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnAddBirthdayTapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </ScrollView>
-
-            </Frame>
-
-        </HorizontalStackLayout>
-
-
-
-    </VerticalStackLayout>
+            <!-- Rewards Text -->
+            <Label Text="Signed Up for Chad Ware House Rewards In Store?"
+                   FontSize="13"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
