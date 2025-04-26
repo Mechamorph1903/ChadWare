@@ -11,7 +11,7 @@
 
                 <!-- Logo -->
                 <Image Source="chadwarelogo.png"
-           HeightRequest="50"
+           HeightRequest="80"
            VerticalOptions="Center"
            HorizontalOptions="Start" />
 
@@ -24,14 +24,16 @@
             VerticalOptions="Center"
             HeightRequest="40">
                     <Grid>
-                        <Entry Placeholder="Search for styles, brands..."
+                        <Entry x:Name="SearchEntry"
+                   Placeholder="Search for styles, brands..."
                    FontSize="14"
                    BackgroundColor="Transparent"
                    TextColor="Black"
                    PlaceholderColor="Gray"
                    Margin="0"
                    VerticalOptions="Center"
-                   HorizontalOptions="FillAndExpand"/>
+                   HorizontalOptions="FillAndExpand"
+                   TextChanged="OnSearchTextChanged"/>
                     </Grid>
                 </Border>
 
@@ -55,14 +57,26 @@
                 <Button Text="New and Trending" FontSize="18" TextColor="Black" BackgroundColor="Transparent"/>
                 <Button Text="Sale" FontSize="18" TextColor="Red" BackgroundColor="Transparent"/>
                 <!--Cart-->
+
+                <ImageButton Source="cart.png" HeightRequest="24" Clicked="OnCartClicked" BackgroundColor="Transparent"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="4" Padding="8">
+                <ImageButton Source="homeicon.png" 
+                             Clicked="OnHomeClicked" />
+                <Label Text="/" FontSize="30" VerticalTextAlignment="Center" />
+                <Label Text= "Home/Women's Clothing and Accessories" FontSize="20" VerticalTextAlignment="Center" />
+              
                 <ImageButton Source="cart.png" HeightRequest="24" Clicked="OnCartClicked"/>
+
             </HorizontalStackLayout>
 
             <!-- Hero Banner -->
             <Image Source="womenbanner.png" Aspect="AspectFill" HeightRequest="220"/>
 
             <!-- Category Buttons -->
-            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto"
+            <Grid x:Name="CategoryGrid"
+                  ColumnDefinitions="Auto,Auto,Auto,Auto"
                   ColumnSpacing="30"
                   Padding="10"
                   HorizontalOptions="Center">
@@ -71,6 +85,39 @@
                 <ImageButton Source="womenshoes.png" Grid.Column="2" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
                 <ImageButton Source="womenjewelry.png" Grid.Column="3" HeightRequest="200" WidthRequest="200" Clicked="OnCategoryClicked" />
             </Grid>
+
+            <!-- Search Results -->
+            <CollectionView x:Name="SearchResults" 
+                          IsVisible="False"
+                          ItemsSource="{Binding SearchResultsCollection}"
+                          ItemsLayout="VerticalGrid, 2"
+                          Margin="10,20,10,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="5" Padding="10">
+                            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                                <Image Source="{Binding Image}"
+                                       HeightRequest="280"
+                                       Aspect="AspectFill"/>
+                                <Label Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="{Binding Price, StringFormat='${0:F2}'}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"/>
+                                <Button Text="Add to Cart"
+                                        CommandParameter="{Binding}"
+                                        Clicked="OnAddToCartClicked"
+                                        BackgroundColor="#007ACC"
+                                        TextColor="White"
+                                        CornerRadius="20"
+                                        Padding="5,2"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>

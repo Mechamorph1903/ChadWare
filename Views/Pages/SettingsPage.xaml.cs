@@ -1,3 +1,4 @@
+
 using Microsoft.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
@@ -119,5 +120,4 @@ public partial class SettingsPage : ContentPage
         ContentArea.Content = stack;
     }
 }
-
 }
