@@ -1,14 +1,38 @@
+using System.Collections.ObjectModel;
+using ChadWare.Controllers;
 using ChadWare.Models;
+using ChadWare.Services;
 
 namespace ChadWare.Views.Pages;
 
 public partial class ItemsPage : ContentPage
 {
-	public ItemsPage(string category)
+    private readonly CartController _cartController;
+    private const long _dummyUserId = 1;
+    public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
+    public string CategoryTitle { get; }
+    public string CategoryPath { get; }
+
+    public ItemsPage(string category)
 	{
 		InitializeComponent();
-	}
+        CategoryTitle = category.ToUpper();
+        CategoryPath = category;
+        BindingContext = this;
 
+        // resolve CartController once
+        var ds = App.Services.GetRequiredService<IDataService>();
+        _cartController = new CartController(ds);
+        LoadProducts(category);
+    }
+
+    private void LoadProducts(string category)
+    {
+        var list = ProductService.Instance.GetProductsByCategory(category);
+        Products.Clear();
+        foreach (var p in list)
+            Products.Add(p);
+    }
     private async void OnMenTapped(object sender, EventArgs e)
     {
         // Navigate or show men's section
@@ -45,6 +69,15 @@ public partial class ItemsPage : ContentPage
     {
         if (sender is Button button && button.CommandParameter is Product product)
         {
+            var cartItem = new CartItem(
+                   userId: _dummyUserId,
+                   productId: product.ProductID,
+                   quantity: 1,
+                   unitPrice: product.Price,
+                   size: string.Empty
+            );
+
+            await _cartController.AddToCartAsync(_dummyUserId, cartItem);
             // Dummy implementation - just show success message
             await DisplayAlert("Success", $"{product.Name} added to cart", "OK");
         }

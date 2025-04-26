@@ -91,7 +91,7 @@ public partial class ProductPage : ContentPage
             else if (fileName.Contains("shoes"))
                 category = "Women Shoes";
             else if (fileName.Contains("jewelry"))
-                category = "Women Jewelry";
+                category = "Women Jewellery";
 
             if (!string.IsNullOrEmpty(category))
             {
