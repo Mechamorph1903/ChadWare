@@ -105,5 +105,12 @@ public partial class MenProductPage : ContentPage
 
 
 
+    // private async void OnCartClicked(object sender, EventArgs e)
+    // {
+    //     await Navigation.PushAsync(new Views.Pages.CartPage());
+    // }
+
+
+
 
 }
