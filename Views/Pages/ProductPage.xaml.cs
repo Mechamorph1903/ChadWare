@@ -21,12 +21,20 @@ public partial class ProductPage : ContentPage
 
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
-        // After we have profile page
-        // await Navigation.PushAsync(new ProfilePage());
-
-        // For now
-        await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
+        var userEmail = await SecureStorage.Default.GetAsync("UserEmail");
+        
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            // User not logged in, redirect to login page
+            await Navigation.PopToRootAsync();
+        }
+        else
+        {
+            // Show user profile
+            await Navigation.PushAsync(new UserProfilePage(userEmail));
+        }
     }
+
     private async void OnCategoryClicked(object sender, EventArgs e)
     {
         if (sender is ImageButton button && button.Source is FileImageSource imageSource)

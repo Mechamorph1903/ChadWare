@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChadWare.Views.Pages.UserProfilePage"
+             Title="User Profile"
+             BackgroundColor="#a6a6a6">
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <!-- User Icon -->
+        <Image Source="usericon.png"
+               HeightRequest="100"
+               WidthRequest="100"
+               HorizontalOptions="Center" />
+
+        <!-- User Name -->
+        <Label x:Name="UserNameLabel"
+               Text="John Doe"
+               FontSize="24"
+               TextColor="Black"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <!-- Email -->
+        <Border Stroke="#ccc"
+                StrokeThickness="1"
+                BackgroundColor="White"
+                Padding="15"
+                HorizontalOptions="Fill">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Email"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Label x:Name="EmailLabel"
+                       TextColor="Black" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Password -->
+        <Border Stroke="#ccc"
+                StrokeThickness="1"
+                BackgroundColor="White"
+                Padding="15"
+                HorizontalOptions="Fill">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Password"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Label x:Name="PasswordLabel"
+                       Text="********"
+                       TextColor="Black" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Sign Out Button -->
+        <Button Text="Sign Out"
+                BackgroundColor="Black"
+                TextColor="White"
+                CornerRadius="20"
+                HeightRequest="40"
+                Margin="0,20,0,0"
+                Clicked="OnSignOutClicked" />
+    </VerticalStackLayout>
+</ContentPage>
