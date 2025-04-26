@@ -102,7 +102,7 @@
                       VerticalOptions="Center"/>
                         <Label Text="$299"
                      VerticalOptions ="Center" 
-                     HorizontalOptions="Start"/>
+                     HorizontalOptions="Start"/> 
                     </HorizontalStackLayout>
                 </Grid>
 

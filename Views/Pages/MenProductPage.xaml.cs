@@ -2,6 +2,10 @@ namespace ChadWare.Views.Pages;
 
 public partial class MenProductPage : ContentPage
 {
+    public MenProductPage()
+    {
+        InitializeComponent();
+    }
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
         // After we have profile page
@@ -51,9 +55,14 @@ public partial class MenProductPage : ContentPage
                 await DisplayAlert("Error", "Unknown category", "OK");
             }
         }
+
     }
-    public MenProductPage()
-	{
-		InitializeComponent();
-	}
+
+    private async void OnCartClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Views.Pages.CartPage());
+    }
+
+
+
 }

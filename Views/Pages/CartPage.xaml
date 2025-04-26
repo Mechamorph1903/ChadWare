@@ -1,67 +1,62 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChadWare.Views.Pages.CartPage"
-             Title="CartPage">
-    <ScrollView>
-        <VerticalStackLayout Spacing="20">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ChadWare.Views.Pages.CartPage"
+    Title="Cart"
+    BackgroundColor="#a6a6a6">
 
-            <!-- Top Navigation Bar -->
-            <Grid Padding="10" BackgroundColor="LightGray" ColumnDefinitions="*,2*,*,*,*,Auto" VerticalOptions="Start">
-                <Label Text="CHAD" FontSize="24" FontAttributes="Bold" />
-                <Label Text="Men" VerticalOptions="Center" HorizontalOptions="Center" />
-                <Label Text="Women" VerticalOptions="Center" HorizontalOptions="Center" />
-                <Label Text="New and Trending" VerticalOptions="Center" HorizontalOptions="Center" />
-                <Label Text="Sale" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Center" />
-                <HorizontalStackLayout VerticalOptions="Center">
-                    <Image Source="user_icon.png" WidthRequest="24" HeightRequest="24"/>
-                    <Label Text="Sarah" Margin="5,0,0,0"/>
-                </HorizontalStackLayout>
-            </Grid>
+    <VerticalStackLayout Padding="10" Spacing="20">
 
-            <!-- Breadcrumb -->
-            <HorizontalStackLayout Padding="10" Spacing="5">
-                <Image Source="home_icon.png" WidthRequest="16" HeightRequest="16" />
-                <Label Text="Women's Fashion Shoes and Accessories" FontSize="14" />
-            </HorizontalStackLayout>
+        <!-- Top Header -->
+        <Grid ColumnDefinitions="Auto,*,Auto" HeightRequest="60" VerticalOptions="Start" ColumnSpacing="10">
+            <Image Source="chadwarelogo.png" HeightRequest="50" VerticalOptions="Center" />
+            <Border Grid.Column="1" Stroke="#ccc" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="40">
+                <Entry Placeholder="Search for styles…" BackgroundColor="Transparent" />
+            </Border>
+            <ImageButton Grid.Column="2" Source="usericon.png" HeightRequest="40" Clicked="OnUserIconClicked" />
+        </Grid>
 
-            <!-- Hero Banner -->
-            <Grid HeightRequest="200">
-                <Image Source="women_banner.png" Aspect="AspectFill"/>
-                <Label Text="Find the latest trends in women’s fashion"
-                       FontSize="28"
-                       TextColor="White"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       HorizontalTextAlignment="Center"/>
-            </Grid>
+        <!-- Navigation Tabs -->
+        <HorizontalStackLayout Spacing="18" HorizontalOptions="Center">
+            <Button Text="Men" Clicked="OnMenTapped" />
+            <Button Text="Women" Clicked="OnWomenTapped" />
+            <Button Text="New and Trending" />
+            <Button Text="Sale" TextColor="Red" />
+            <ImageButton Source="cart.png" />
+        </HorizontalStackLayout>
 
-            <!-- Category Grid -->
-            <Grid Padding="10" ColumnDefinitions="*,*,*,*" RowDefinitions="Auto">
-                <!-- Category 1: Apparel -->
-                <VerticalStackLayout Grid.Column="0">
-                    <Image Source="apparel.png" Aspect="AspectFill" HeightRequest="100" />
-                    <Label Text="Apparel" HorizontalOptions="Center" FontSize="16"/>
-                </VerticalStackLayout>
-                <!-- Category 2: Bags -->
-                <VerticalStackLayout Grid.Column="1">
-                    <Image Source="bags.png" Aspect="AspectFill" HeightRequest="100" />
-                    <Label Text="Bags" HorizontalOptions="Center" FontSize="16"/>
-                </VerticalStackLayout>
-                <!-- Category 3: Shoes -->
-                <VerticalStackLayout Grid.Column="2">
-                    <Image Source="shoes.png" Aspect="AspectFill" HeightRequest="100" />
-                    <Label Text="Shoes" HorizontalOptions="Center" FontSize="16"/>
-                </VerticalStackLayout>
-                <!-- Category 4: Jewelry -->
-                <VerticalStackLayout Grid.Column="3">
-                    <Image Source="jewelry.png" Aspect="AspectFill" HeightRequest="100" />
-                    <Label Text="Jewelry" HorizontalOptions="Center" FontSize="16"/>
-                </VerticalStackLayout>
-            </Grid>
+        <!-- Cart Items -->
+        <CollectionView x:Name="CartCollectionView"
+                    SelectionMode="None"
+                    Margin="0,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="60,*,Auto" RowDefinitions="Auto,Auto">
+                        <Image Source="{Binding Product.Image}"
+                   HeightRequest="60" WidthRequest="60"
+                   Grid.RowSpan="2"/>
+                        <Label Text="{Binding Product.Name}"
+                   FontAttributes="Bold"
+                   Grid.Column="1"/>
+                        <Label Text="{Binding Product.Price, StringFormat='${0:F2}'}"
+                   TextColor="Gray"
+                   Grid.Column="1" Grid.Row="1"/>
+                        <Button Text="Remove"
+                    TextColor="Red"
+                    BackgroundColor="Transparent"
+                    Grid.Column="2" Grid.RowSpan="2"
+                    CommandParameter="{Binding .}"
+                    Clicked="OnRemoveClicked"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-        </VerticalStackLayout>
-    </ScrollView>
+        <!-- Checkout -->
+        <Button Text="Checkout"
+            BackgroundColor="Green"
+            TextColor="White"
+            Clicked="OnCheckoutClicked"/>
 
+    </VerticalStackLayout>
 </ContentPage>
