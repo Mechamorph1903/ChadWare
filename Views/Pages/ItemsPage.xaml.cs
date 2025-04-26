@@ -1,12 +1,33 @@
+using System.Collections.ObjectModel;
 using ChadWare.Models;
+using ChadWare.Services;
 
 namespace ChadWare.Views.Pages;
 
 public partial class ItemsPage : ContentPage
 {
+	private readonly ProductService _productService;
+	private readonly string _category;
+	public ObservableCollection<Product> Products { get; }
+
 	public ItemsPage(string category)
 	{
 		InitializeComponent();
+		_productService = ProductService.Instance;
+		_category = category;
+		Products = new ObservableCollection<Product>();
+		BindingContext = this;
+		LoadProducts();
+	}
+
+	private void LoadProducts()
+	{
+		var categoryProducts = _productService.GetProductsByCategory(_category);
+		Products.Clear();
+		foreach (var product in categoryProducts)
+		{
+			Products.Add(product);
+		}
 	}
 
     private async void OnMenTapped(object sender, EventArgs e)

@@ -80,19 +80,19 @@ public partial class MenProductPage : ContentPage
 
             if (fileName.Contains("apparel"))
             {
-                category = "Men";
+                category = "menapparel";
             }
             else if (fileName.Contains("bags"))
             {
-                category = "Men Bags";
+                category = "menbag";
             }
             else if (fileName.Contains("shoes"))
             {
-                category = "Men Shoes";
+                category = "menshoe";
             }
             else if (fileName.Contains("accessories"))
             {
-                category = "Accessories";
+                category = "menaccessory";
             }
 
             if (!string.IsNullOrEmpty(category))
@@ -100,7 +100,6 @@ public partial class MenProductPage : ContentPage
                 await Navigation.PushAsync(new Views.Pages.ItemsPage(category));
             }
         }
-
     }
 
 
