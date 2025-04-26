@@ -23,36 +23,51 @@ namespace ChadWare.Views.Pages
         {
             bool confirm = await DisplayAlert("Confirm Order", "Are you sure you want to place the order?", "Yes", "No");
 
-            if (confirm)
+            if (!confirm)
+                return;
+
+            await DisplayAlert("Billing", "Using billing method on file...", "OK");
+
+            // Build the receipt text
+            string receiptContent = "Receipt\n\n";
+            foreach (var item in _cartItems)
             {
-                await DisplayAlert("Billing", "Using billing method on file...", "OK");
+                receiptContent += $"{item.ProductName} - ${item.UnitPrice:F2}\n";
+            }
+            receiptContent += $"\nTotal: {_cartItems.Sum(i => i.UnitPrice):C}";
 
-                string receiptContent = "Receipt\n\n";
-                foreach (var item in _cartItems)
+            try
+            {
+                // Let user pick a folder (simulate by picking a file first)
+                var picked = await FilePicker.PickAsync(new PickOptions
                 {
-                    receiptContent += $"{item.ProductName} - ${item.UnitPrice:F2}\n";
+                    PickerTitle = "Select a file to overwrite (or pick any file in target folder)"
+                });
+
+                if (picked != null)
+                {
+                    // Get the directory path from the picked file
+                    var folderPath = Path.GetDirectoryName(picked.FullPath);
+
+                    // Create a receipt filename inside that directory
+                    var receiptFileName = $"Receipt_{DateTime.Now:yyyyMMddHHmmss}.txt";
+                    var fullReceiptPath = Path.Combine(folderPath, receiptFileName);
+
+                    // Write the receipt file
+                    File.WriteAllText(fullReceiptPath, receiptContent);
+
+                    await DisplayAlert("Success", $"Receipt saved successfully at {fullReceiptPath}.", "OK");
                 }
-                receiptContent += $"\nTotal: {_cartItems.Sum(i => i.UnitPrice):C}";
-
-                // Prompt user to select a location to save the file
-                var filePath = Path.Combine(FileSystem.AppDataDirectory, $"Receipt_{DateTime.Now:yyyyMMddHHmmss}.txt");
-
-                try
+                else
                 {
-                    // Save the file directly to the specified path
-                    using (var stream = File.Open(filePath, FileMode.Create, FileAccess.Write))
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        await writer.WriteAsync(receiptContent);
-                    }
-
-                    await DisplayAlert("Success", $"Receipt saved successfully at {filePath}.", "OK");
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", $"Failed to save receipt: {ex.Message}", "OK");
+                    await DisplayAlert("Cancelled", "No location selected.", "OK");
                 }
             }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to save receipt: {ex.Message}", "OK");
+            }
         }
+
     }
 }
