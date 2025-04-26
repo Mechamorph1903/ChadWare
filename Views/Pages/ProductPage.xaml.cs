@@ -71,11 +71,6 @@ public partial class ProductPage : ContentPage
     }
 
 
-    private async void OnCartClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new Views.Pages.CartPage());
-    }
-
     private async void OnCategoryClicked(object sender, EventArgs e)
     {
         if (sender is ImageButton button && button.Source is FileImageSource imageSource)
