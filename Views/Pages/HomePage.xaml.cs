@@ -92,6 +92,6 @@ public partial class HomePage : ContentPage
 
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Views.Pages.SettingsPage());
+        await Navigation.PushAsync(new SettingsPage());
     }
 }

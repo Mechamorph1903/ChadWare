@@ -58,11 +58,7 @@ public partial class ItemsPage : ContentPage
 
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
-        // After we have profile page
-        // await Navigation.PushAsync(new ProfilePage());
-
-        // For now
-        await Navigation.PushAsync(new Views.Pages.SettingsPage());
+        await Navigation.PushAsync(new SettingsPage());
     }
 
     private async void OnAddToCartClicked(object sender, EventArgs e)
