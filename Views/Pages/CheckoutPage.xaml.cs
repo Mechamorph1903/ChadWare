@@ -57,6 +57,7 @@ namespace ChadWare.Views.Pages
                     File.WriteAllText(fullReceiptPath, receiptContent);
 
                     await DisplayAlert("Success", $"Receipt saved successfully at {fullReceiptPath}.", "OK");
+                    await Navigation.PushAsync(new Views.Pages.HomePage());
                 }
                 else
                 {

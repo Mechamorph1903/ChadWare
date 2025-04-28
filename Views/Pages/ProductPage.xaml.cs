@@ -67,7 +67,7 @@ public partial class ProductPage : ContentPage
         // await Navigation.PushAsync(new ProfilePage());
 
         // For now
-        await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
+        await Navigation.PushAsync(new Views.Pages.SettingsPage());
     }
 
 
