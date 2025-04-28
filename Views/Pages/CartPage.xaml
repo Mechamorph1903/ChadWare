@@ -3,28 +3,74 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ChadWare.Views.Pages.CartPage"
     Title="Cart"
-    BackgroundColor="#f2f2f2">
+   BackgroundColor="#a6a6a6">
+	<ScrollView>
+		<VerticalStackLayout Padding="10" Spacing="20">
 
-    <NavigationPage.BackButtonTitle>Back</NavigationPage.BackButtonTitle>
+			<Grid ColumnDefinitions="Auto,*,Auto" Padding="10" VerticalOptions="Start" HeightRequest="60" ColumnSpacing="10">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="15">
+				<!-- Logo -->
+				<Image Source="chadwarelogo.png"
+                HeightRequest="80"
+                VerticalOptions="Center"
+                HorizontalOptions="Start" />
 
-            <!-- Top Logo and Cart Title -->
-            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center" HeightRequest="60">
-                <Image Source="chadwarelogo.png" HeightRequest="50" />
-                <Label Text="Cart" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
-                <ImageButton Source="usericon.png" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" />
-            </Grid>
+				<!-- Search Bar -->
+				<Border Grid.Column="1"
+                Stroke="#ccc"
+                StrokeThickness="1"
+                BackgroundColor="White"
+                Padding="10,0"
+                VerticalOptions="Center"
+                HeightRequest="40">
+					<Grid>
+						<Entry Placeholder="Search for styles, brands..."
+                        FontSize="14"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        PlaceholderColor="Gray"
+                        Margin="0"
+                        VerticalOptions="Center"
+                        HorizontalOptions="FillAndExpand"/>
+					</Grid>
+				</Border>
 
-            <!-- Navigation Tabs -->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
-                <Button Text="Men" BackgroundColor="Transparent" TextColor="Black" FontAttributes="Bold" Clicked="OnMenTapped"/>
-                <Button Text="Women" BackgroundColor="Transparent" TextColor="Black" FontAttributes="Bold" Clicked="OnWomenTapped"/>
-                <Button Text="Trending" BackgroundColor="Transparent" TextColor="Black" FontAttributes="Bold"/>
-                <Button Text="Sale" BackgroundColor="Transparent" TextColor="Red" FontAttributes="Bold"/>
-                <ImageButton Source="cart.png" HeightRequest="30" BackgroundColor="Transparent" />
-            </HorizontalStackLayout>
+				<!-- User Icon -->
+				<ImageButton Grid.Column="2"
+                    Source="usericon.png"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Clicked="OnUserIconClicked"/>
+			</Grid>
+
+			<!-- Navigation Tabs -->
+			<HorizontalStackLayout Spacing="18" HorizontalOptions="Center">
+				<Button Text="Men" FontSize="18" TextColor="Black"
+                   BackgroundColor="Transparent" Clicked="OnMenTapped" />
+				<Button Text="Women" FontSize="18" TextColor="Black" BackgroundColor="Transparent"
+             Clicked="OnWomenTapped"/>
+				<Button Text="New and Trending" FontSize="18" TextColor="Black" BackgroundColor="Transparent"/>
+				<Button Text="Sale" FontSize="18" TextColor="Red" BackgroundColor="Transparent"/>
+				<!--Cart-->
+				<ImageButton Source="cart.png" HeightRequest="24" Clicked="OnCartClicked" BackgroundColor="Transparent"/>
+			</HorizontalStackLayout>
+
+			<!-- Page Title -->
+			<Label Text="{Binding CategoryTitle}"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center"/>
+
+			<HorizontalStackLayout Spacing="4" Padding="8">
+				<ImageButton Source="homeicon.png"
+                             Clicked="OnHomeClicked" />
+				<Label Text="/" FontSize="30" VerticalTextAlignment="Center" />
+				<Label Text="{Binding CategoryPath}" FontSize="20" VerticalTextAlignment="Center" />
+			</HorizontalStackLayout>
 
             <!-- Cart Items -->
             <CollectionView x:Name="CartCollectionView" SelectionMode="None" Margin="0,20,0,0">
