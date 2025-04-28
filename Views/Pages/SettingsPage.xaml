@@ -37,7 +37,7 @@
 
             <!-- User Icon -->
             <StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center">
-                <Image Source="usericon.png" HeightRequest="32" WidthRequest="32"/>
+                <Image Source="usericon.png" HeightRequest="50" WidthRequest="50"/>
                 <Label x:Name="UsernameLabel" Text="Loading..." FontAttributes="Bold" VerticalOptions="Center" Margin="5,0"/>
             </StackLayout>
         </Grid>
@@ -68,7 +68,7 @@
                 <Button Text="Payment Methods" Clicked="OnPaymentMethodsClicked" />
                 <Label Text="Add, edit, or remove payment options." FontSize="10" TextColor="Gray" HorizontalOptions="End" />
 
-                <Button Text="Sign Out" BackgroundColor="Transparent" TextColor="Black" Clicked="OnSignOutClicked"/>
+                <Button Text="Sign Out" BackgroundColor="Red" TextColor="Black" Clicked="OnSignOutClicked"/>
             </StackLayout>
 
             <!-- Info Panel -->
