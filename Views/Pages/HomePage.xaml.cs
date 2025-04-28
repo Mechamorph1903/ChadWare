@@ -92,6 +92,6 @@ public partial class HomePage : ContentPage
 
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
+        await Navigation.PushAsync(new SettingsPage());
     }
 }

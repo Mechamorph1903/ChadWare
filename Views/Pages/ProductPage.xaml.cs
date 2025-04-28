@@ -63,19 +63,11 @@ public partial class ProductPage : ContentPage
 
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
-        // After we have profile page
-        // await Navigation.PushAsync(new ProfilePage());
-
-        // For now
-        await DisplayAlert("Coming Soon", "User profile or login screen will be here!", "OK");
+        await Navigation.PushAsync(new SettingsPage());
     }
 
 
 
-    // private async void OnCartClicked(object sender, EventArgs e)
-    // {
-    //     await Navigation.PushAsync(new Views.Pages.CartPage());
-    // }
 
     private async void OnCategoryClicked(object sender, EventArgs e)
     {
