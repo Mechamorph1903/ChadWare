@@ -79,7 +79,7 @@
                     <DataTemplate>
                         <Border  Margin="5" Padding="10">
                             <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                                <Image Source="{Binding Image}" HeightRequest="280" Aspect="AspectFill"/>
+                                <Image Source="{Binding Image}" HeightRequest="400" Aspect="AspectFill"/>
                                 <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"/>
                                 <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="14" HorizontalOptions="Center"/>
                                 <Button Text="Add to Cart"

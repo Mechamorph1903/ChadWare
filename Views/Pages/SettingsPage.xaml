@@ -5,20 +5,20 @@
 
     <VerticalStackLayout>
         <HorizontalStackLayout Spacing="30">
-            <Image Source="chadware_logo.png"
-               HeightRequest="80"
-               WidthRequest="80"
+            <Image Source="chadwarelogo.png"
+               HeightRequest="150"
+               WidthRequest="150"
                VerticalOptions="Start"/>
 
             <SearchBar Placeholder ="Search..."
                    Margin ="20"
                    WidthRequest="800"
                    HeightRequest="40"
-                   VerticalOptions="Start"
+                   VerticalOptions="Center"
                    BackgroundColor="White"/>
 
-            <Image Source="user_logo.png"
-               HeightRequest="40"
+            <Image Source="usericon.png"
+               HeightRequest="80"
                WidthRequest="80"
                HorizontalOptions="End"/>
         </HorizontalStackLayout>

@@ -81,12 +81,8 @@ namespace ChadWare.Views.Pages
 
 
         private async void OnUserIconClicked(object sender, EventArgs e)
-        {
-            // After we have profile page
-            // await Navigation.PushAsync(new ProfilePage());
-
-            // For now
-            await Navigation.PushAsync(new Views.Pages.SettingsPage());
+        {           
+             await Navigation.PushAsync(new SettingsPage());
         }
 
         private async void OnCartClicked(object sender, EventArgs e)

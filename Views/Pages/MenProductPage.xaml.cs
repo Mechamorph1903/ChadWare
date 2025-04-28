@@ -39,14 +39,9 @@ public partial class MenProductPage : ContentPage
         }
     }
 
-
     private async void OnUserIconClicked(object sender, EventArgs e)
     {
-        // After we have profile page
-        // await Navigation.PushAsync(new ProfilePage());
-
-        // For now
-        await Navigation.PushAsync(new Views.Pages.SettingsPage());
+        await Navigation.PushAsync(new SettingsPage());
     }
 
     private async void OnCartClicked(object sender, EventArgs e)
@@ -80,7 +75,7 @@ public partial class MenProductPage : ContentPage
 
             if (fileName.Contains("apparel"))
             {
-                category = "Men";
+                category = "Men Apparel";
             }
             else if (fileName.Contains("bags"))
             {
@@ -92,7 +87,7 @@ public partial class MenProductPage : ContentPage
             }
             else if (fileName.Contains("accessories"))
             {
-                category = "Accessories";
+                category = "Men Accessories";
             }
 
             if (!string.IsNullOrEmpty(category))
@@ -101,15 +96,4 @@ public partial class MenProductPage : ContentPage
             }
         }
     }
-
-
-
-    // private async void OnCartClicked(object sender, EventArgs e)
-    // {
-    //     await Navigation.PushAsync(new Views.Pages.CartPage());
-    // }
-
-
-
-
 }
