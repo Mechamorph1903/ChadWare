@@ -77,7 +77,7 @@ public partial class ProductPage : ContentPage
             string category = "";
 
             if (fileName.Contains("apparel"))
-                category = "Women";
+                category = "Women Apparel";
             else if (fileName.Contains("bags"))
                 category = "Women Bags";
             else if (fileName.Contains("shoes"))
