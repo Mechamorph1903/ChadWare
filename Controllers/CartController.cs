@@ -26,7 +26,7 @@ namespace ChadWare.Controllers
         {
             var items = await GetCartAsync(userId);
             await fromPage.Navigation.PushAsync(
-                new Views.Pages.CheckoutPage(userId, items)
+                new Views.Pages.CheckoutPage(items)  
             );
         }
     }

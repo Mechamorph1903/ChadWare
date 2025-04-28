@@ -1,163 +1,22 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChadWare.Views.Pages.CheckoutPage"
-             Title="CheckoutPage">
-    <Grid ColumnDefinitions="2*,1*" Padding="20">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ChadWare.Views.Pages.CheckoutPage"
+    Title="Checkout"
+    BackgroundColor="#a6a6a6">
 
-        <!-- Left: Form -->
-        <ScrollView>
-            <VerticalStackLayout Spacing="20">
-                <Label Text ="Name"
-                    TextColor="Grey"/>
-                <Border>
-                    <Entry BackgroundColor="#f2f2f2" 
-                    WidthRequest="500"
-                    HorizontalOptions="Start"/>
-                </Border>
-                <Label Text="Email"
-                    TextColor="Grey"/>
-                <Entry BackgroundColor="#f2f2f2" Keyboard="Email"
-                     WidthRequest="500"
-                     HorizontalOptions="Start"/>
-                <Label Text="Shipping Address"
-                    TextColor="Grey"/>
-                <Entry BackgroundColor="#f2f2f2" 
-                    WidthRequest="500"
-                    HorizontalOptions="Start"/>
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label Text="Review and Confirm"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
 
-                <HorizontalStackLayout Spacing="300">
+        <Button
+            Text="Confirm Purchase"
+            Clicked="OnCheckoutClicked"
+            BackgroundColor="Green"
+            TextColor="White"
+            Padding="10" />
 
-                    <Label Text="City/State"
-                         TextColor ="Grey"/>
-
-
-                    <Label Text="Zip Code" 
-                        TextColor="Grey"/>
-                </HorizontalStackLayout>
-
-                <HorizontalStackLayout Spacing="20">
-                    <Entry BackgroundColor="#f2f2f2"
-                    WidthRequest="260"/>
-                    <Entry BackgroundColor="#f2f2f2"
-                        WidthRequest ="260"/>
-                </HorizontalStackLayout>
-
-                <Label Text="Card Number"
-                    TextColor="Grey"/>
-                <Entry  Placeholder ="***-***-****" BackgroundColor="#f2f2f2" IsPassword="True"
-                     WidthRequest="500"
-                     HorizontalOptions="Start"/>
-
-                <HorizontalStackLayout Spacing="300">
-
-                    <Label Text="Expirary Date"
-          TextColor ="Grey"/>
-
-
-                    <Label Text="CVV" 
-         TextColor="Grey"/>
-                </HorizontalStackLayout>
-
-                <HorizontalStackLayout Spacing="20">
-                    <Entry BackgroundColor="#f2f2f2"
-     WidthRequest="260"/>
-                    <Entry Placeholder="***" BackgroundColor="#f2f2f2"
-         WidthRequest ="260"/>
-                </HorizontalStackLayout>
-
-
-
-            </VerticalStackLayout>
-        </ScrollView>
-
-        <!-- Right: Cart Items and Checkout -->
-        <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="15" BackgroundColor="White"  >
-
-            <!-- Cart Items -->
-            <Label Text="Your Cart" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
-
-            <VerticalStackLayout Spacing="5">
-                <!-- Each item -->
-                <Grid ColumnDefinitions="1*,0*" ColumnSpacing="0">
-                    <HorizontalStackLayout Spacing="15">
-                        <Image Source="womenbag10.jpg"
-                            HeightRequest="80"
-                            WidthRequest="40"/>
-                        <Label Text="Black Dress (S)"
-                            VerticalOptions="Center"/>
-                        <Label Text="$299"
-                            VerticalOptions ="Center" 
-                            HorizontalOptions="Start"/>
-                    </HorizontalStackLayout>
-
-                </Grid>
-
-                <Grid ColumnDefinitions="1*,0*" ColumnSpacing="0">
-                    <HorizontalStackLayout Spacing="15">
-                        <Image Source="womenbag11.jpg"
-                      HeightRequest="80"
-                      WidthRequest="40"/>
-                        <Label Text="Black Dress (S)"
-                      VerticalOptions="Center"/>
-                        <Label Text="$299"
-                     VerticalOptions ="Center" 
-                     HorizontalOptions="Start"/>
-                    </HorizontalStackLayout>
-                </Grid>
-
-                <Grid ColumnDefinitions="1*,0*" ColumnSpacing="0">
-                    <HorizontalStackLayout Spacing="15">
-                        <Image Source="menbag11.jpg"
-                     HeightRequest="80"
-                     WidthRequest="40"/>
-                        <Label Text="Black Dress (S)"
-                     VerticalOptions="Center"/>
-                        <Label Text="$299"
-                     VerticalOptions ="Center" 
-                     HorizontalOptions="Start"/>
-                    </HorizontalStackLayout>
-                </Grid>
-            </VerticalStackLayout>
-            
-            <!-- CollectionView display of cart from database-->
-
-            <StackLayout>
-                <!-- Other UI elements -->
-                <CollectionView x:Name="CartSummary">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding ProductID}" />
-                                <Label Text="{Binding Quantity}" />
-                                <Label Text="{Binding UnitPrice}" />
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-               <!-- <Label x:Name="TotalLabel" />   -->
-            </StackLayout>
-            <!--end of collection view-->
-
-            <BoxView HeightRequest="1" Color="Gray" Margin="0,10"/>
-
-            <!-- Total -->
-            <Grid ColumnDefinitions="2*,1*" ColumnSpacing="10">
-                <Label Text="Total" FontAttributes="Bold" />
-                <Label x:Name="TotalLabel" Text="$697" FontAttributes="Bold" HorizontalOptions="End" />
-            </Grid>
-
-            <!-- Checkout Button -->
-            <Button Text="CHECKOUT"
-                 BackgroundColor="#0077cc"
-                 TextColor="White"
-                 CornerRadius="20"
-                 Margin="0, 10, 10, 10"
-                 FontAttributes="Bold"
-                 HeightRequest="50"
-                 Clicked="OnCheckoutClicked" />
-
-        </VerticalStackLayout>
-
-    </Grid>
+    </VerticalStackLayout>
 </ContentPage>

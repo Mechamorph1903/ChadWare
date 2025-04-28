@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using ChadWare.Services;    
-using ChadWare.ViewModels;
-using ChadWare.Views.Pages;
+using ChadWare.Services;
+using ChadWare.Controllers;    
+using ChadWare.Views.Pages;    // so CartPage is known
 
 namespace ChadWare
 {
@@ -18,18 +18,22 @@ namespace ChadWare
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            // Register services
+            // your registrations
             builder.Services.AddSingleton<IDataService, LocalDataService>();
-
-            // Register pages and viewmodels
-            builder.Services.AddTransient<SignIn>();
-            builder.Services.AddTransient<SignInViewModel>();
+            builder.Services.AddSingleton<CartController>();
+            builder.Services.AddTransient<CartPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            // Build the MauiApp
+            var mauiApp = builder.Build();
+
+            // ← capture the IServiceProvider
+            App.Services = mauiApp.Services;
+
+            return mauiApp;
         }
     }
 }

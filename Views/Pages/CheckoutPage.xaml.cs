@@ -1,69 +1,73 @@
-using Microsoft.Maui;                       
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Controls;
-using ChadWare.Controllers;
-using ChadWare.Models;
-using ChadWare.Services;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
+using ChadWare.Models;
 
 namespace ChadWare.Views.Pages
 {
     public partial class CheckoutPage : ContentPage
     {
-        private readonly OrderController _orderController;
-        //private long _currentUserId;
-        private IList<CartItem> _cartItems;
+        private readonly IList<CartItem> _cartItems;
 
-        public CheckoutPage(long userId, IList<CartItem> items)
+        public CheckoutPage(IList<CartItem> cartItems)
         {
             InitializeComponent();
-
-            var dataService = this.Handler.MauiContext.Services
-                     .GetRequiredService<IDataService>();
-            _orderController = new OrderController(dataService);
-
-            // If you need the user again:
-            //var mauiApp = (App)Application.Current;
-            //_currentUserId = mauiApp.CurrentUser.UserID;
-
-            _cartItems = items;
-
-            // pre-fill summary
-            CartSummary.ItemsSource = _cartItems;
-            TotalLabel.Text = _cartItems.Sum(i => i.Quantity * i.UnitPrice).ToString("C");
+            _cartItems = cartItems;
         }
 
         private async void OnCheckoutClicked(object sender, EventArgs e)
         {
-            // gather shipping info from entry fields
-            //var address = new Address
-            //{
-            //    Street = StreetEntry.Text,
-            //    City = CityEntry.Text,
-            //    State = StateEntry.Text,
-            //    ZipCode = ZipEntry.Text
-            //};
+            bool confirm = await DisplayAlert("Confirm Order", "Are you sure you want to place the order?", "Yes", "No");
 
-            var orderItems = _cartItems
-                  .Select(ci => new OrderItem(
-                      orderId: 0,                // will be set in your service
-                      productId: ci.ProductID,
-                      quantity: ci.Quantity,
-                      unitPrice: ci.UnitPrice)).ToList();
+            if (!confirm)
+                return;
 
-            var order = new Order
+            await DisplayAlert("Billing", "Using billing method on file...", "OK");
+
+            // Build the receipt text
+            string receiptContent = "Receipt\n\n";
+            foreach (var item in _cartItems)
             {
-                //UserID = _currentUserId,
-                UserID = 1,
-                TotalPrice = _cartItems.Sum(i => i.Quantity * i.UnitPrice),
-                OrderDate = DateTime.UtcNow,
-                Items = orderItems,
-                //ShippingAddress = address
-            };
+                receiptContent += $"{item.ProductName} - ${item.UnitPrice:F2}\n";
+            }
+            receiptContent += $"\nTotal: {_cartItems.Sum(i => i.UnitPrice):C}";
 
-            await _orderController.CompleteOrderAsync(this, order);
+            try
+            {
+                // Let user pick a folder (simulate by picking a file first)
+                var picked = await FilePicker.PickAsync(new PickOptions
+                {
+                    PickerTitle = "Select a file to overwrite (or pick any file in target folder)"
+                });
+
+                if (picked != null)
+                {
+                    // Get the directory path from the picked file
+                    var folderPath = Path.GetDirectoryName(picked.FullPath);
+
+                    // Create a receipt filename inside that directory
+                    var receiptFileName = $"Receipt_{DateTime.Now:yyyyMMddHHmmss}.txt";
+                    var fullReceiptPath = Path.Combine(folderPath, receiptFileName);
+
+                    // Write the receipt file
+                    File.WriteAllText(fullReceiptPath, receiptContent);
+
+                    await DisplayAlert("Success", $"Receipt saved successfully at {fullReceiptPath}.", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Cancelled", "No location selected.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to save receipt: {ex.Message}", "OK");
+            }
         }
+
     }
 }

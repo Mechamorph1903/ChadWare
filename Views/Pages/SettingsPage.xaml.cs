@@ -1,3 +1,4 @@
+
 using Microsoft.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
@@ -12,176 +13,183 @@ namespace ChadWare.Views.Pages
 {
     public partial class SettingsPage : ContentPage
     {
-        private readonly IDataService _dataService;
-        private User _currentUser;
+        // User data model
+        private UserData userData;
 
-        public SettingsPage(IDataService dataService)
+        public SettingsPage()
         {
             InitializeComponent();
-            _dataService = dataService;
+
+            // Initialize user data with mock values
+            userData = new UserData
+            {
+                Name = "Sarah Smith",
+                Email = "sarahsmith55@gmail.com",
+                MobileNumber = "(123)-456-789",
+                Birthday = null // Initially not set
+            };
+
+            // Load user data to UI
             LoadUserData();
-            ShowPersonalInfo();
         }
 
-        private async void LoadUserData()
+        private void LoadUserData()
+        {
+            // In a real implementation, this would update UI elements with the current userData values
+            // For now, assuming data is already displayed via XAML
+        }
+
+        // Event handler for sign-out button
+        private async void OnSignOutClicked(object sender, EventArgs e)
+        {
+            bool confirm = await DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
+
+            if (confirm)
+            {
+                await DisplayAlert("Signed Out", "You have been signed out successfully.", "OK");
+
+                // In a real app, you would clear authentication tokens and navigate to login page
+                // Example: await Navigation.PushAsync(new LoginPage());
+            }
+        }
+
+        // Event handlers for changing user information
+        private async void OnChangeEmailTapped(object sender, EventArgs e)
+        {
+            string newEmail = await DisplayPromptAsync("Change Email", "Enter new email address:", initialValue: userData.Email);
+
+            if (!string.IsNullOrWhiteSpace(newEmail))
+            {
+                // Validate email format
+                if (IsValidEmail(newEmail))
+                {
+                    userData.Email = newEmail;
+                    await DisplayAlert("Success", "Email updated successfully.", "OK");
+                    LoadUserData();
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Please enter a valid email address.", "OK");
+                }
+            }
+        }
+
+        private async void OnChangePasswordTapped(object sender, EventArgs e)
+        {
+            string currentPassword = await DisplayPromptAsync("Change Password", "Enter current password:", keyboard: Keyboard.Default);
+
+            if (!string.IsNullOrWhiteSpace(currentPassword))
+            {
+                // In a real app, you would validate the current password
+                // For this demo, we'll accept any non-empty input
+
+                string newPassword = await DisplayPromptAsync("Change Password", "Enter new password:", keyboard: Keyboard.Default);
+
+                if (!string.IsNullOrWhiteSpace(newPassword))
+                {
+                    string confirmPassword = await DisplayPromptAsync("Change Password", "Confirm new password:", keyboard: Keyboard.Default);
+
+                    if (newPassword == confirmPassword)
+                    {
+                        await DisplayAlert("Success", "Password updated successfully.", "OK");
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "Passwords do not match.", "OK");
+                    }
+                }
+            }
+        }
+
+        private async void OnChangeNameTapped(object sender, EventArgs e)
+        {
+            string newName = await DisplayPromptAsync("Change Name", "Enter new name:", initialValue: userData.Name);
+
+            if (!string.IsNullOrWhiteSpace(newName))
+            {
+                userData.Name = newName;
+                await DisplayAlert("Success", "Name updated successfully.", "OK");
+                LoadUserData();
+            }
+        }
+
+        private async void OnChangeMobileNumberTapped(object sender, EventArgs e)
+        {
+            string newMobileNumber = await DisplayPromptAsync("Change Mobile Number", "Enter new mobile number:", initialValue: userData.MobileNumber);
+
+            if (!string.IsNullOrWhiteSpace(newMobileNumber))
+            {
+                // Validate phone number format
+                if (IsValidPhoneNumber(newMobileNumber))
+                {
+                    userData.MobileNumber = newMobileNumber;
+                    await DisplayAlert("Success", "Mobile number updated successfully.", "OK");
+                    LoadUserData();
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Please enter a valid mobile number.", "OK");
+                }
+            }
+        }
+
+        private async void OnAddBirthdayTapped(object sender, EventArgs e)
+        {
+            // For simplicity, we'll just use a prompt - in a real app you might want a date picker
+            string birthdayInput = await DisplayPromptAsync("Add Birthday", "Enter your birthday (MM/DD/YYYY):",
+                initialValue: userData.Birthday?.ToString("MM/dd/yyyy") ?? "");
+
+            if (!string.IsNullOrWhiteSpace(birthdayInput))
+            {
+                // Try to parse the date
+                if (DateTime.TryParse(birthdayInput, out DateTime birthday))
+                {
+                    userData.Birthday = birthday;
+                    await DisplayAlert("Success", "Birthday added successfully.", "OK");
+                    LoadUserData();
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Please enter a valid date format (MM/DD/YYYY).", "OK");
+                }
+            }
+        }
+
+        // Helper methods for validation
+        private bool IsValidEmail(string email)
         {
             try
             {
-                // In a real app, you would get the current user's ID from authentication
-                _currentUser = await _dataService.GetUserByEmailAsync("SarahSmith45@gmail.com") ?? new User
-                {
-                    FirstName = "Sarah",
-                    LastName = "Smith",
-                    Email = "SarahSmith45@gmail.com",
-                    PhoneNumber = "(123)-456-7890",
-                    EmailNotifications = true,
-                    SmsNotifications = false,
-                    MailNotifications = true
-                };
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
             }
-            catch (Exception ex)
+            catch
             {
-                await DisplayAlert("Error", "Failed to load user data: " + ex.Message, "OK");
+                return false;
             }
         }
 
-        void OnPersonalInfoClicked(object sender, EventArgs e)
+        private bool IsValidPhoneNumber(string phoneNumber)
         {
-            ShowPersonalInfo();
-        }
-
-        void OnCommunicationsClicked(object sender, EventArgs e)
-        {
-            ContentArea.Content = new StackLayout
-            {
-                Spacing = 10,
-                Children =
-                {
-                    new Label { Text = "Communications Preferences", FontAttributes = FontAttributes.Bold, FontSize = 20 },
-                    new Label { Text = "Email Notifications", FontAttributes = FontAttributes.Bold },
-                    new Switch { IsToggled = _currentUser?.EmailNotifications ?? false },
-                    new Label { Text = "SMS Notifications", FontAttributes = FontAttributes.Bold },
-                    new Switch { IsToggled = _currentUser?.SmsNotifications ?? false },
-                    new Label { Text = "Mail Notifications", FontAttributes = FontAttributes.Bold },
-                    new Switch { IsToggled = _currentUser?.MailNotifications ?? false },
-                }
-            };
-        }
-
-        void OnPaymentMethodsClicked(object sender, EventArgs e)
-        {
-            ContentArea.Content = new StackLayout
-            {
-                Spacing = 10,
-                Children =
-                {
-                    new Label { Text = "Payment Methods", FontAttributes = FontAttributes.Bold, FontSize = 20 },
-                    new Label { Text = "Visa ending in 1234", FontSize = 16 },
-                    new Button { Text = "Add New Payment Method", FontSize = 12 }
-                }
-            };
-        }
-
-        async void OnSignOutClicked(object sender, EventArgs e)
-        {
-            bool confirm = await DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
-            if (confirm)
-            {
-                // TODO: Implement sign out logic
-                await Shell.Current.GoToAsync("///SignIn");
-            }
-        }
-
-        void ShowPersonalInfo()
-        {
-            var stack = new StackLayout { Spacing = 15 };
-
-            // Email
-            var emailEntry = new Entry { Text = _currentUser?.Email, Placeholder = "Email" };
-            var emailButton = new Button { Text = "Update Email" };
-            emailButton.Clicked += async (s, e) => {
-                try
-                {
-                    _currentUser.Email = emailEntry.Text;
-                    await _dataService.UpdateUserAsync(_currentUser);
-                    await DisplayAlert("Success", "Email updated successfully!", "OK");
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", "Failed to update email: " + ex.Message, "OK");
-                }
-            };
-
-            // Password
-            var passwordEntry = new Entry { Placeholder = "New Password", IsPassword = true };
-            var passwordButton = new Button { Text = "Update Password" };
-            passwordButton.Clicked += async (s, e) => {
-                try
-                {
-                    _currentUser.Password = passwordEntry.Text;
-                    await _dataService.UpdateUserAsync(_currentUser);
-                    await DisplayAlert("Success", "Password updated successfully!", "OK");
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", "Failed to update password: " + ex.Message, "OK");
-                }
-            };
-
-            // Name
-            var firstNameEntry = new Entry { Text = _currentUser?.FirstName, Placeholder = "First Name" };
-            var lastNameEntry = new Entry { Text = _currentUser?.LastName, Placeholder = "Last Name" };
-            var nameButton = new Button { Text = "Update Name" };
-            nameButton.Clicked += async (s, e) => {
-                try
-                {
-                    _currentUser.FirstName = firstNameEntry.Text;
-                    _currentUser.LastName = lastNameEntry.Text;
-                    await _dataService.UpdateUserAsync(_currentUser);
-                    await DisplayAlert("Success", "Name updated successfully!", "OK");
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", "Failed to update name: " + ex.Message, "OK");
-                }
-            };
-
-            // Phone
-            var phoneEntry = new Entry { Text = _currentUser?.PhoneNumber, Placeholder = "Mobile Number" };
-            var phoneButton = new Button { Text = "Update Mobile Number" };
-            phoneButton.Clicked += async (s, e) => {
-                try
-                {
-                    _currentUser.PhoneNumber = phoneEntry.Text;
-                    await _dataService.UpdateUserAsync(_currentUser);
-                    await DisplayAlert("Success", "Mobile number updated successfully!", "OK");
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", "Failed to update mobile number: " + ex.Message, "OK");
-                }
-            };
-
-            stack.Children.Add(new Label { Text = "Personal Information", FontAttributes = FontAttributes.Bold, FontSize = 20 });
-            
-            stack.Children.Add(new Label { Text = "Email", FontAttributes = FontAttributes.Bold });
-            stack.Children.Add(emailEntry);
-            stack.Children.Add(emailButton);
-
-            stack.Children.Add(new Label { Text = "Password", FontAttributes = FontAttributes.Bold });
-            stack.Children.Add(passwordEntry);
-            stack.Children.Add(passwordButton);
-
-            stack.Children.Add(new Label { Text = "Name", FontAttributes = FontAttributes.Bold });
-            stack.Children.Add(firstNameEntry);
-            stack.Children.Add(lastNameEntry);
-            stack.Children.Add(nameButton);
-
-            stack.Children.Add(new Label { Text = "Mobile Number", FontAttributes = FontAttributes.Bold });
-            stack.Children.Add(phoneEntry);
-            stack.Children.Add(phoneButton);
-
-            ContentArea.Content = stack;
+            // Simple validation - in a real app you might want more sophisticated validation
+            return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length >= 7;
         }
     }
+
+    // Simple data model class to hold user information
+    public class UserData
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string MobileNumber { get; set; }
+        public DateTime? Birthday { get; set; }
+        // Password is not stored here for security reasons
+    }
 }
+    
+
+
+
+
+
+
