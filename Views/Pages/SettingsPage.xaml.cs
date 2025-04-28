@@ -119,7 +119,10 @@ namespace ChadWare.Views.Pages
                 }
             }
         }
-
+        private async void OnHomeClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.Pages.HomePage());
+        }
         private async void OnChangeNameTapped(object sender, EventArgs e)
         {
             if (_currentUser == null) return;

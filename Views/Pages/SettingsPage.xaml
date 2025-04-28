@@ -42,7 +42,12 @@
             </StackLayout>
         </Grid>
 
-        <!-- Main Content -->
+            <HorizontalStackLayout Spacing="4" Padding="8">
+                <ImageButton Source="homeicon.png" 
+                             Clicked="OnHomeClicked" />
+            </HorizontalStackLayout>
+
+            <!-- Main Content -->
         <Grid Grid.Row="1" Padding="20" ColumnSpacing="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
