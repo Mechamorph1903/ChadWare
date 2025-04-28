@@ -44,7 +44,7 @@ namespace ChadWare
                 await SecureStorage.Default.SetAsync("UserPassword", password);
 
                 await _userService.UpdateLastLoginAsync(email);
-                await Navigation.PushAsync(new Views.Pages.ProductPage());
+                await Navigation.PushAsync(new Views.Pages.HomePage());
             }
             else
             {
