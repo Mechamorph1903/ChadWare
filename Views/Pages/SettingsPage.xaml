@@ -1,7 +1,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChadWare.Views.Pages.SettingsPage"
-             BackgroundColor="#a6a6a6">
+             BackgroundColor="#a6a6a6"
+             Title="User Profile">
     <ScrollView>
         <ContentPage.Resources>
         <Style TargetType="Entry">
@@ -28,7 +29,7 @@
 
             <!-- Logo -->
             <StackLayout>
-                <ImageButton Source="chadwarelogo.png" HeightRequest="180"/>
+                <ImageButton Source="chadwarelogo.png" HeightRequest="80" WidthRequest="80" BackgroundColor="Transparent"/>
             </StackLayout>
 
             <!-- Search Bar -->
@@ -41,10 +42,14 @@
                 <Label x:Name="UsernameLabel" Text="Loading..." FontAttributes="Bold" VerticalOptions="Center" Margin="5,0"/>
             </StackLayout>
         </Grid>
+        
+        <!--Home Icon-->
 
-            <HorizontalStackLayout Spacing="4" Padding="8">
+            <HorizontalStackLayout Spacing="4" Padding="8" Grid.Row="0">
                 <ImageButton Source="homeicon.png" 
-                             Clicked="OnHomeClicked" />
+                             Clicked="OnHomeClicked" 
+                             HeightRequest="50" WidthRequest="50"
+                             BackgroundColor="Transparent"/>
             </HorizontalStackLayout>
 
             <!-- Main Content -->
