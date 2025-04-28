@@ -1,13 +1,6 @@
 
-using Microsoft.Maui;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Controls;
-using ChadWare.Controllers;
-using ChadWare.Models;
 using ChadWare.Services;
-using System.Collections.Generic;
-using System;
-using System.Linq;
+
 
 namespace ChadWare.Views.Pages
 {
@@ -18,6 +11,7 @@ namespace ChadWare.Views.Pages
 
         public SettingsPage()
         {
+
             InitializeComponent();
 
             // Initialize user data with mock values
@@ -36,16 +30,20 @@ namespace ChadWare.Views.Pages
        
 
         // Event handler for sign-out button
-        private async void OnSignOutClicked(object sender, EventArgs e)
+    private async void OnSignOutClicked(object sender, EventArgs e)
         {
-            bool confirm = await DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
-
-            if (confirm)
+            try
             {
-                await DisplayAlert("Signed Out", "You have been signed out successfully.", "OK");
+                // Clear the stored credentials
+                SecureStorage.Default.Remove("UserEmail");
+                SecureStorage.Default.Remove("UserPassword");
 
-                // In a real app, you would clear authentication tokens and navigate to login page
-                // Example: await Navigation.PushAsync(new LoginPage());
+                // Navigate back to main page and clear the navigation stack
+                await Navigation.PopToRootAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Failed to sign out: " + ex.Message, "OK");
             }
         }
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using SQLite;
 using ChadWare.Models;
@@ -74,3 +74,5 @@ namespace ChadWare.Services
         }
     }
 }
+
+
