@@ -20,7 +20,7 @@
 
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
         <!-- Header -->
-        <Grid Padding="20" BackgroundColor="#D1D1C4" Row="0">
+        <Grid Padding="20" BackgroundColor="#a6a6a6" Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="3*" />
@@ -29,7 +29,7 @@
 
             <!-- Logo -->
             <StackLayout>
-                <ImageButton Source="chadwarelogo.png" HeightRequest="80" WidthRequest="80" BackgroundColor="Transparent"/>
+                <ImageButton Source="chadwarelogo.png" HeightRequest="90" WidthRequest="90" BackgroundColor="Transparent"/>
             </StackLayout>
 
             <!-- Search Bar -->
