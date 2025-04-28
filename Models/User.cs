@@ -20,6 +20,16 @@ namespace ChadWare.Models
         public string PhoneNumber { get; set; } = string.Empty;
         public DateTime LastLoginAt { get; internal set; }
 
+        // Notification Preferences
+        public bool EmailNotifications { get; set; }
+        public bool SmsNotifications { get; set; }
+        public bool MailNotifications { get; set; }
+
+        // Additional user information
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? LastLoginAt { get; set; }
+        public bool IsVerified { get; set; }
+
         public User() { }
 
         public User(string firstName, string lastName, string email, string password, string phoneNumber)
