@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChadWare.MainPage"
-             BackgroundColor="#a6a6a6">
+                          BackgroundColor="#a6a6a6">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
@@ -20,19 +20,18 @@
                    HorizontalOptions="Start" />
 
             <!-- Email Entry -->
-            <Entry Placeholder="Email"
+            <Entry x:Name="EmailEntry"
+                   Placeholder="Email"
                    PlaceholderColor="Gray"
                    BackgroundColor="Transparent"
                    HeightRequest="40"
-                   WidthRequest="350"
- 
-            />
-
+                   WidthRequest="350"/>
 
 
             <!-- Password Entry -->
-            <Entry Placeholder="Password"
- 
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Password"
+                   IsPassword="true"
                    PlaceholderColor="Gray"
                    BackgroundColor="Transparent"
                    HeightRequest="40"
@@ -79,7 +78,8 @@
                     CornerRadius="20"
                     HeightRequest="30"
                     WidthRequest="230"
-                    FontSize="20" />
+                    FontSize="20"
+                    Clicked="OnSignUpClicked" />
 
             <!-- Forgot Password -->
             <Label Text="Forgot Password"
