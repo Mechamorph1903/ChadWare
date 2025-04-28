@@ -64,7 +64,8 @@
 
                         <!-- Account Name -->
                         <Label Grid.Column="1"
-                           Text="Sarah's Account"
+                               x:Name="UserNameLabel"
+                           Text="{Binding User.Email}"
                            FontSize="20"
                            FontAttributes="Bold"
                            VerticalOptions="Center"
@@ -186,7 +187,9 @@
                             <Label Text="Email" 
                                FontSize="14"
                                TextColor="#666666"/>
-                            <Label Text="sarahsmith55@gmail.com" 
+                            <Label 
+                                x:Name="EmailLabel"
+                                Text="sarahsmith55@gmail.com" 
                                FontSize="16"/>
                             <Label Text="Change email" 
                                TextColor="Blue"

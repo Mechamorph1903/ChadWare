@@ -30,14 +30,10 @@ namespace ChadWare.Views.Pages
             };
 
             // Load user data to UI
-            LoadUserData();
+            LoadUserProfile();
         }
 
-        private void LoadUserData()
-        {
-            // In a real implementation, this would update UI elements with the current userData values
-            // For now, assuming data is already displayed via XAML
-        }
+       
 
         // Event handler for sign-out button
         private async void OnSignOutClicked(object sender, EventArgs e)
@@ -152,6 +148,24 @@ namespace ChadWare.Views.Pages
                 {
                     await DisplayAlert("Error", "Please enter a valid date format (MM/DD/YYYY).", "OK");
                 }
+            }
+        }
+
+        private async void LoadUserProfile(string email)
+        {
+            var userService = new UserService();
+            var user = await userService.GetUserByEmailAsync(email);
+
+            if (user != null)
+            {
+                // Set email
+                EmailLabel.Text = user.Email;
+
+                // Create display name from email
+                string displayName = user.Email.Split('@')[0]; // Get part before @
+                displayName = System.Globalization.CultureInfo.CurrentCulture.TextInfo
+                    .ToTitleCase(displayName.Replace(".", " ")); // Convert dots to spaces and capitalize
+                UserNameLabel.Text = displayName;
             }
         }
 
