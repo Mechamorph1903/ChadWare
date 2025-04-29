@@ -150,7 +150,7 @@ namespace ChadWare.Views.Pages
             {
                 _mobileNumber = newMobile;
                 MobileLabel.Text = _mobileNumber;
-                await DisplayAlert("Success", "Mobile number updated (not saved).", "OK");
+                await DisplayAlert("Success", "Mobile number updated.", "OK");
             }
         }
 
@@ -162,7 +162,7 @@ namespace ChadWare.Views.Pages
             {
                 _birthday = birthday;
                 BirthdayLabel.Text = _birthday?.ToString("MM/dd/yyyy") ?? "Not Set";
-                await DisplayAlert("Success", "Birthday updated (not saved).", "OK");
+                await DisplayAlert("Success", "Birthday updated.", "OK");
             }
             else
             {
